@@ -15,6 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const pages = [
   "Electrodomésticos",
@@ -38,10 +39,6 @@ const ResponsiveAppBar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -146,12 +143,14 @@ const ResponsiveAppBar = () => {
           </Box>
           <Box sx={{ flexGrow: 0, m: 1 }}>
             <Tooltip title="Administrador">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0, color: grey[50], m: 1 }}
-              >
-                <SupervisorAccountIcon />
-              </IconButton>
+              <Link to="/admin">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0, color: grey[50], m: 1 }}
+                >
+                  <SupervisorAccountIcon />
+                </IconButton>
+              </Link>
             </Tooltip>
           </Box>
         </Toolbar>
