@@ -17,24 +17,45 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 
+
 const pages = [
-  "Electrodomésticos",
-  "Ropa",
-  "Vehículos",
-  "Alimentos",
-  "Mascotas",
+  {
+    "Nombre":"Electrodomesticos",
+    "Url":"/electrodomesticos"
+  },
+  {
+    "Nombre":"Ropa",
+    "Url":"/ropa"
+  },
+  {
+    "Nombre":"Vehiculos",
+    "Url":"/vehiculos"
+  },
+  {
+    "Nombre":"Alimento",
+    "Url":"/alimentos"
+  },
+  {
+    "Nombre":"Mascotas",
+    "Url":"/mascotas"
+  }
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [electrodomestico, setelectrodomestico] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const manejadorelectrodomestico = () => {
+    setelectrodomestico("electrodomesticos")
   };
 
   const handleCloseNavMenu = () => {
@@ -46,6 +67,7 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          
           <Typography
             variant="h6"
             noWrap
@@ -65,6 +87,7 @@ const ResponsiveAppBar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -75,6 +98,7 @@ const ResponsiveAppBar = () => {
             >
               <MenuIcon />
             </IconButton>
+            
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -94,12 +118,19 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                
+                <MenuItem key={page.Nombre} onClick={handleOpenUserMenu  }>
+                  
+                  <Typography textAlign="center">{page.Nombre}</Typography>
+                 
                 </MenuItem>
+                
               ))}
+            
             </Menu>
+            
           </Box>
+          
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -117,28 +148,32 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            WebShop
-          </Typography>
+            WebShop      
+          </Typography> 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
+              <Link to={page.Url}>
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.Nombre}
+                onClick={handleOpenUserMenu }
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.Nombre}
               </Button>
+              </Link>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Carrito de compras">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0, color: grey[50] }}
-              >
-                <ShoppingCartIcon />
-              </IconButton>
+              <Link to="/carrito-de-compras">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0, color: grey[50] }}
+                >
+                  <ShoppingCartIcon />
+                </IconButton>
+              </Link>
             </Tooltip>
           </Box>
           <Box sx={{ flexGrow: 0, m: 1 }}>
@@ -151,6 +186,8 @@ const ResponsiveAppBar = () => {
                   <SupervisorAccountIcon />
                 </IconButton>
               </Link>
+
+
             </Tooltip>
           </Box>
         </Toolbar>
