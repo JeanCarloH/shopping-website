@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,45 +16,34 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 
-
 const pages = [
   {
-    "Nombre":"Electrodomesticos",
-    "Url":"/electrodomesticos"
+    nombre: "Electrodomesticos",
+    url: "/electrodomesticos",
   },
   {
-    "Nombre":"Ropa",
-    "Url":"/ropa"
+    nombre: "Ropa",
+    url: "/ropa",
   },
   {
-    "Nombre":"Vehiculos",
-    "Url":"/vehiculos"
+    nombre: "Vehiculos",
+    url: "/vehiculos",
   },
   {
-    "Nombre":"Alimento",
-    "Url":"/alimentos"
+    nombre: "Alimento",
+    url: "/alimentos",
   },
   {
-    "Nombre":"Mascotas",
-    "Url":"/mascotas"
-  }
+    nombre: "Mascotas",
+    url: "/mascotas",
+  },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [electrodomestico, setelectrodomestico] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const manejadorelectrodomestico = () => {
-    setelectrodomestico("electrodomesticos")
   };
 
   const handleCloseNavMenu = () => {
@@ -67,7 +55,7 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          
+
           <Typography
             variant="h6"
             noWrap
@@ -87,7 +75,6 @@ const ResponsiveAppBar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-          
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -98,7 +85,7 @@ const ResponsiveAppBar = () => {
             >
               <MenuIcon />
             </IconButton>
-            
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -118,19 +105,15 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                
-                <MenuItem key={page.Nombre} onClick={handleOpenUserMenu  }>
-                  
-                  <Typography textAlign="center">{page.Nombre}</Typography>
-                 
-                </MenuItem>
-                
+                <Link to={page.url} key={page.nombre}>
+                  <MenuItem>
+                    <Typography textAlign="center">{page.nombre}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
-            
             </Menu>
-            
           </Box>
-          
+
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -148,18 +131,14 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            WebShop      
-          </Typography> 
+            WebShop
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={page.Url}>
-              <Button
-                key={page.Nombre}
-                onClick={handleOpenUserMenu }
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page.Nombre}
-              </Button>
+              <Link to={page.url} key={page.nombre}>
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  {page.nombre}
+                </Button>
               </Link>
             ))}
           </Box>
@@ -167,10 +146,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Carrito de compras">
               <Link to="/carrito-de-compras">
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0, color: grey[50] }}
-                >
+                <IconButton sx={{ p: 0, color: grey[50] }}>
                   <ShoppingCartIcon />
                 </IconButton>
               </Link>
@@ -179,15 +155,10 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0, m: 1 }}>
             <Tooltip title="Administrador">
               <Link to="/admin">
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0, color: grey[50], m: 1 }}
-                >
+                <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
                   <SupervisorAccountIcon />
                 </IconButton>
               </Link>
-
-
             </Tooltip>
           </Box>
         </Toolbar>
