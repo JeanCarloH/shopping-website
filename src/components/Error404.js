@@ -1,9 +1,10 @@
 function Error404() {
-    return <h3>Error 404</h3>;
-        
-    //como poner mas jsx?
-    
-  }
-  
-  export default Error404;
-  
+  return (
+    <div>
+      <h2>Error 404</h2>
+      <p>Esta ruta no ha sido encontrada!</p>
+    </div>
+  );
+}
+
+export default Error404;

@@ -1,42 +1,6 @@
 {
   "productos": [
     {
-      "id": 1,
-      "nombre": "Zapatos",
-      "descripcion": "Descripcion zapatos",
-      "cantidad": 12,
-      "precio": 20000,
-      "categoria": "Ropa",
-      "imagen": null
-    },
-    {
-      "id": 1,
-      "nombre": "Zapatos",
-      "descripcion": "Descripcion zapatos",
-      "cantidad": 12,
-      "precio": 20000,
-      "categoria": "Ropa",
-      "imagen": null
-    },
-    {
-      "id": 1,
-      "nombre": "Zapatos",
-      "descripcion": "Descripcion zapatos",
-      "cantidad": 12,
-      "precio": 20000,
-      "categoria": "Ropa",
-      "imagen": null
-    },
-    {
-      "id": 2,
-      "nombre": "Camisa",
-      "descripcion": "camisa",
-      "cantidad": "3",
-      "precio": "10000",
-      "categoria": 21,
-      "imagen": ""
-    },
-    {
       "id": 3,
       "nombre": "Moto",
       "descripcion": "Moto",

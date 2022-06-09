@@ -11,6 +11,8 @@ import { Link, useOutletContext } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box } from "@mui/system";
 import { IconButton, Tooltip } from "@mui/material";
+import EnableColorOnDarkAppBar from "./EnableColorOnDarkAppBar";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,17 +36,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ProductTable() {
   const { db } = useOutletContext();
+  const { deleteData } = useOutletContext();
   return (
     <>
-      <Box textAlign="right" sx={{ flexGrow: 0 }}>
-        <Tooltip title="Crear producto">
-          <Link to="/admin/registrar">
-            <IconButton sx={{ p: 0 }}>
-              <AddCircleIcon />
-            </IconButton>
-          </Link>
-        </Tooltip>
-      </Box>
+    <EnableColorOnDarkAppBar/>
+ 
       <TableContainer sx={{ m: 3 }} component={Paper}>
         <Table sx={{ width: 1200 }} aria-label="customized table">
           <TableHead>
@@ -55,6 +51,7 @@ export default function ProductTable() {
               <StyledTableCell align="right">Precio</StyledTableCell>
               <StyledTableCell align="right">Categoria</StyledTableCell>
               <StyledTableCell align="right">Imagen</StyledTableCell>
+              <StyledTableCell align="right">Acciones</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -78,6 +75,10 @@ export default function ProductTable() {
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {product.imagen}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                  <button>editar</button>
+                  <button onClick={() => deleteData(product.id)}>eliminar</button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

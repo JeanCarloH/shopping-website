@@ -35,6 +35,7 @@ function Admin() {
   }, [url]);
 
   const createData = (data) => {
+    data.id = Date.now();
     let options = {
       body: data,
       headers: { "content-type": "application/json" },
@@ -48,6 +49,31 @@ function Admin() {
       }
     });
   };
+
+  const deleteData = (id) => {
+    let isDelete = window.confirm(
+      `¿Estás seguro de eliminar el registro con el id '${id}'?`
+    );
+
+    if (isDelete) {
+      let endpoint = `${url}/${id}`;
+      let options = {
+        headers: { "content-type": "application/json" },
+      };
+
+      api.del(endpoint, options).then((res) => {
+      
+        if (!res.err) {
+
+          dispatch({ type: TYPES.ELIMINAR_PRODUCTO, payload: id });
+        } else {
+          setError(res);
+        }
+      });
+    } else {
+      return;
+    }
+  };
   return (
     <>
       <h2>componente de Admin</h2>
@@ -58,7 +84,7 @@ function Admin() {
           bgColor="#dc3545"
         />
       )}
-      <Outlet context={{ db, createData }} />
+      <Outlet context={{ db, createData, deleteData}} />
     </>
   );
 }

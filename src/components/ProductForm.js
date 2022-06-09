@@ -14,6 +14,7 @@ import {
 import { PhotoCamera } from "@mui/icons-material";
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const initialForm = {
   id: null,
@@ -39,11 +40,14 @@ export default function ProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*if (!form.name || !form.cel) {
+    if (!form.nombre || !form.descripcion || !form.cantidad || !form.precio || !form.categoria ) {
       alert("Datos incompletos.");
       return;
-    }*/
-    createData(form);
+    }else {
+
+      createData(form);
+    }
+    
     /*if(dataToEdit === null){
         createData(form);
     }else{
@@ -119,11 +123,11 @@ export default function ProductForm() {
               onChange={handleChange}
               label="Categoria"
             >
-              <MenuItem value={10}>Electrodomesticos</MenuItem>
-              <MenuItem value={21}>Ropa</MenuItem>
-              <MenuItem value={22}>Vehiculos</MenuItem>
-              <MenuItem value={23}>Alimentos</MenuItem>
-              <MenuItem value={25}>Mascotas</MenuItem>
+              <MenuItem value="electrodomestico">Electrodomesticos</MenuItem>
+              <MenuItem value="ropa">Ropa</MenuItem>
+              <MenuItem value="vehiculo">Vehiculos</MenuItem>
+              <MenuItem value="alimento">Alimentos</MenuItem>
+              <MenuItem value="mascota">Mascotas</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -155,6 +159,17 @@ export default function ProductForm() {
           >
             Guardar
           </Button>
+          
+        </Grid>
+        
+        <Grid item xs={12} md={12}>
+        <Link to="/admin">
+          <Button
+            variant="contained"
+          >
+            regresar
+          </Button>
+          </Link>
         </Grid>
       </Grid>
     </Box>
