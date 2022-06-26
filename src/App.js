@@ -20,23 +20,27 @@ function App() {
           <Route
             exact
             path="/electrodomesticos"
-            element={<Categoria nombre="Electrodomesticos" />}
+            element={<Categoria categoria={1} nombre="Electrodomesticos" />}
           />
-          <Route exact path="/ropa" element={<Categoria nombre="Ropa" />} />
+          <Route
+            exact
+            path="/ropa"
+            element={<Categoria categoria={2} nombre="Ropa" />}
+          />
           <Route
             exact
             path="/vehiculos"
-            element={<Categoria nombre="Vehiculos" />}
+            element={<Categoria categoria={3} nombre="Vehiculos" />}
           />
           <Route
             exact
             path="/alimentos"
-            element={<Categoria nombre="Alimentos" />}
+            element={<Categoria categoria={4} nombre="Alimentos" />}
           />
           <Route
             exact
             path="/mascotas"
-            element={<Categoria nombre="Mascotas" />}
+            element={<Categoria categoria={5} nombre="Mascotas" />}
           />
         </Route>
         <Route exact path="/admin" element={<Admin />}>

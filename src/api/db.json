@@ -1,48 +1,48 @@
 {
   "productos": [
     {
-      "id": 3,
-      "nombre": "Moto",
+      "id": 1,
+      "nombre": "Dr 650",
       "descripcion": "Moto",
       "cantidad": "1",
-      "precio": "1200000",
-      "categoria": 22,
+      "precio": "18000000",
+      "categoria": 3,
+      "imagen": ""
+    },
+    {
+      "id": 2,
+      "nombre": "Mazda 2",
+      "descripcion": "Carro",
+      "cantidad": "4",
+      "precio": "30000000",
+      "categoria": 3,
+      "imagen": ""
+    },
+    {
+      "id": 3,
+      "nombre": "Nevera",
+      "descripcion": "Electrodomestico",
+      "cantidad": "4",
+      "precio": "5000000",
+      "categoria": 1,
       "imagen": ""
     },
     {
       "id": 4,
-      "nombre": "Carro",
-      "descripcion": "Carro",
-      "cantidad": "4",
-      "precio": "4000000",
-      "categoria": 22,
+      "nombre": "Camiseta dc",
+      "descripcion": "Camiseta",
+      "cantidad": "20",
+      "precio": "20000",
+      "categoria": 2,
       "imagen": ""
     },
     {
       "id": 5,
-      "nombre": "dfsadf",
-      "descripcion": "sdfasdf",
-      "cantidad": "4",
-      "precio": "30000",
-      "categoria": 22,
-      "imagen": ""
-    },
-    {
-      "id": 6,
-      "nombre": "Prueba",
-      "descripcion": "123123",
-      "cantidad": "123123",
-      "precio": "12313",
-      "categoria": 21,
-      "imagen": ""
-    },
-    {
-      "id": 7,
-      "nombre": "Jean",
-      "descripcion": "Jean",
-      "cantidad": "123",
-      "precio": "123123",
-      "categoria": 22,
+      "nombre": "Cuido para mascotas",
+      "descripcion": "Cuido para Jean",
+      "cantidad": "12",
+      "precio": "10000",
+      "categoria": 5,
       "imagen": ""
     }
   ]
