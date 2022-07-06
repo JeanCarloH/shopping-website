@@ -1,15 +1,6 @@
 {
   "productos": [
     {
-      "id": 1,
-      "nombre": "Dr 650",
-      "descripcion": "Moto",
-      "cantidad": "1",
-      "precio": "18000000",
-      "categoria": 3,
-      "imagen": ""
-    },
-    {
       "id": 2,
       "nombre": "Mazda 2",
       "descripcion": "Carro",

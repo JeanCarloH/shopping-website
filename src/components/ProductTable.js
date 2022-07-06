@@ -41,7 +41,7 @@ export default function ProductTable() {
       <EnableColorOnDarkAppBar />
 
       <TableContainer sx={{ m: 3 }} component={Paper}>
-        <Table sx={{ width: 1200 }} aria-label="customized table">
+        <Table sx={{ width:"98%" }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="right">Nombre</StyledTableCell>

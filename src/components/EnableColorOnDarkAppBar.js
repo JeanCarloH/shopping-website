@@ -9,20 +9,31 @@ import { Box, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { grey } from "@mui/material/colors";
+import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 
-function appBarLabel(label) {
+function appBarLabel(label,label2) {
   return (
     <Toolbar>
       <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
         <MenuIcon />
       </IconButton>
-      <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+      <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }} >
         {label}
+      </Typography>
+      <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }} textAlign="right">
+        {label2}
       </Typography>
       <Tooltip title="Registrar">
           <Link to="/admin/registrar">
             <IconButton sx={{flexGrow: 0, m: 1, color: grey[100]}}>
               <AppRegistrationIcon />
+            </IconButton>
+          </Link>
+        </Tooltip>
+        <Tooltip title="Regresar">
+          <Link to="/">
+            <IconButton sx={{flexGrow: 0, m: 1, color: grey[100]}}>
+              <AssignmentReturnIcon/>
             </IconButton>
           </Link>
         </Tooltip>
@@ -34,7 +45,7 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#1976d2",
+      main: "#2196f3",
     },
   },
 });
@@ -44,8 +55,8 @@ export default function EnableColorOnDarkAppBar() {
     <ThemeProvider theme={darkTheme}>
 
         
-        <AppBar position="static" color="primary">
-        {appBarLabel("WebShop")}
+        <AppBar position="static" color="primary" enableColorOnDark>
+        {appBarLabel("WebShopp","Admin")}
         
        
       </AppBar>

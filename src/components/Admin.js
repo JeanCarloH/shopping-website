@@ -50,6 +50,27 @@ function Admin() {
     });
   };
 
+  const updateData = (data) => {
+    let endpoint = `${url}/${data.id}`;
+    //console.log(endpoint);
+
+    let options = {
+      body: data,
+      headers: { "content-type": "application/json" },
+    };
+
+    api.put(endpoint, options).then((res) => {
+      //console.log(res);
+      if (!res.err) {
+        //let newData = db.map((el) => (el.id === data.id ? data : el));
+        //setDb(newData)
+        dispatch({ type: TYPES.UPDATE_DATA, payload: data });
+      } else {
+        setError(res);
+      }
+    });
+  };
+
   const deleteData = (id) => {
     let isDelete = window.confirm(
       `¿Estás seguro de eliminar el registro con el id '${id}'?`
@@ -76,7 +97,7 @@ function Admin() {
   };
   return (
     <>
-      <h2>componente de Admin</h2>
+      <h2></h2>
       {loading && <Loader />}
       {error && (
         <Message
