@@ -13,7 +13,6 @@ import { Box } from "@mui/system";
 import { IconButton, Tooltip } from "@mui/material";
 import EnableColorOnDarkAppBar from "./EnableColorOnDarkAppBar";
 
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -39,8 +38,8 @@ export default function ProductTable() {
   const { deleteData } = useOutletContext();
   return (
     <>
-    <EnableColorOnDarkAppBar/>
- 
+      <EnableColorOnDarkAppBar />
+
       <TableContainer sx={{ m: 3 }} component={Paper}>
         <Table sx={{ width: 1200 }} aria-label="customized table">
           <TableHead>
@@ -77,8 +76,12 @@ export default function ProductTable() {
                     {product.imagen}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                  <button>editar</button>
-                  <button onClick={() => deleteData(product.id)}>eliminar</button>
+                    <Link to={`/admin/editar/${product.id}`}>
+                      <button>editar</button>
+                    </Link>
+                    <button onClick={() => deleteData(product.id)}>
+                      eliminar
+                    </button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

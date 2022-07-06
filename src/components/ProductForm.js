@@ -12,8 +12,8 @@ import {
   styled,
 } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
-import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const initialForm = {
@@ -26,10 +26,23 @@ const initialForm = {
   imagen: "",
 };
 
-export default function ProductForm() {
-  const { createData } = useOutletContext();
+export default function ProductForm({ edit, updateData }) {
+  const { db, createData } = useOutletContext();
 
   const [form, setForm] = useState(initialForm);
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (edit) {
+      const product = db.find((item) => item.id == id);
+      setForm(product);
+    }
+  }, []);
+
+  /*if (edit) {
+    const product = db.find((item) => item.id == id);
+    setForm(product);
+  }*/
 
   const handleChange = (e) => {
     setForm({
@@ -40,14 +53,23 @@ export default function ProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.nombre || !form.descripcion || !form.cantidad || !form.precio || !form.categoria ) {
+    if (
+      !form.nombre ||
+      !form.descripcion ||
+      !form.cantidad ||
+      !form.precio ||
+      !form.categoria
+    ) {
       alert("Datos incompletos.");
       return;
-    }else {
-
-      createData(form);
+    } else {
+      if (edit) {
+        updateData(form);
+      } else {
+        createData(form);
+      }
     }
-    
+
     /*if(dataToEdit === null){
         createData(form);
     }else{
@@ -123,11 +145,11 @@ export default function ProductForm() {
               onChange={handleChange}
               label="Categoria"
             >
-              <MenuItem value="electrodomestico">Electrodomesticos</MenuItem>
-              <MenuItem value="ropa">Ropa</MenuItem>
-              <MenuItem value="vehiculo">Vehiculos</MenuItem>
-              <MenuItem value="alimento">Alimentos</MenuItem>
-              <MenuItem value="mascota">Mascotas</MenuItem>
+              <MenuItem value="1">Electrodomesticos</MenuItem>
+              <MenuItem value="2">Ropa</MenuItem>
+              <MenuItem value="3">Vehiculos</MenuItem>
+              <MenuItem value="4">Alimentos</MenuItem>
+              <MenuItem value="5">Mascotas</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -159,16 +181,11 @@ export default function ProductForm() {
           >
             Guardar
           </Button>
-          
         </Grid>
-        
+
         <Grid item xs={12} md={12}>
-        <Link to="/admin">
-          <Button
-            variant="contained"
-          >
-            regresar
-          </Button>
+          <Link to="/admin">
+            <Button variant="contained">regresar</Button>
           </Link>
         </Grid>
       </Grid>

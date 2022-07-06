@@ -46,6 +46,11 @@ function App() {
         <Route exact path="/admin" element={<Admin />}>
           <Route exact path="/admin" element={<ProductTable />} />
           <Route exact path="/admin/registrar" element={<ProductForm />} />
+          <Route
+            exact
+            path="/admin/editar/:id"
+            element={<ProductForm edit={true} />}
+          />
         </Route>
         <Route exact path="*" element={<Error404 />} />
       </Routes>
