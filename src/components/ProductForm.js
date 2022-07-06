@@ -30,6 +30,7 @@ export default function ProductForm() {
   const { createData } = useOutletContext();
 
   const [form, setForm] = useState(initialForm);
+  
 
   const handleChange = (e) => {
     setForm({
@@ -48,11 +49,7 @@ export default function ProductForm() {
       createData(form);
     }
     
-    /*if(dataToEdit === null){
-        createData(form);
-    }else{
-        updateData(form);
-    }*/
+  
 
     //handleReset();
   };

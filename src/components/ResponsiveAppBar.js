@@ -134,12 +134,12 @@ const ResponsiveAppBar = ({ numProducts }) => {
           >
             WebShop
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }}}>
             {pages.map((page) => (
-              <Link key={page.nombre} to={page.url}>
+              <Link key={page.nombre} to={page.url} >
                 <Button
                   key={page.nombre}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ my: 2, color: "white", display: "block"}}
                 >
                   {page.nombre}
                 </Button>
