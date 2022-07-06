@@ -26,8 +26,8 @@ const initialForm = {
   imagen: "",
 };
 
-export default function ProductForm({ edit, updateData }) {
-  const { db, createData } = useOutletContext();
+export default function ProductForm({ edit }) {
+  const { db, createData, updateData, setDataToEdit } = useOutletContext();
 
   const [form, setForm] = useState(initialForm);
   const { id } = useParams();
@@ -45,14 +45,16 @@ export default function ProductForm({ edit, updateData }) {
   }*/
 
   const handleChange = (e) => {
+    e.preventDefault();
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+   // console.log(e.target)
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     if (
       !form.nombre ||
       !form.descripcion ||
@@ -65,11 +67,17 @@ export default function ProductForm({ edit, updateData }) {
     } else {
       if (edit) {
         updateData(form);
+        
       } else {
         createData(form);
       }
+      handleReset();
     }
-
+  };
+    const handleReset = (e) => {
+      setForm(initialForm);
+      setDataToEdit(null);
+    };
     /*if(dataToEdit === null){
         createData(form);
     }else{
@@ -77,11 +85,15 @@ export default function ProductForm({ edit, updateData }) {
     }*/
 
     //handleReset();
-  };
+  
 
   const Input = styled("input")({
     display: "none",
   });
+
+
+   
+
   return (
     <Box
       component="form"
@@ -93,9 +105,9 @@ export default function ProductForm({ edit, updateData }) {
     >
       <Grid container textAlign="center">
         <Grid item xs={12} md={12}>
-          <h2>Registrar</h2>
+          <h2>Registre su articulo acá</h2>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <TextField
             name="nombre"
             onChange={handleChange}
@@ -104,7 +116,7 @@ export default function ProductForm({ edit, updateData }) {
             value={form.nombre}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <TextField
             name="descripcion"
             onChange={handleChange}
@@ -113,7 +125,7 @@ export default function ProductForm({ edit, updateData }) {
             value={form.descripcion}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <TextField
             name="cantidad"
             onChange={handleChange}
@@ -123,7 +135,7 @@ export default function ProductForm({ edit, updateData }) {
             value={form.cantidad}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <TextField
             name="precio"
             onChange={handleChange}
@@ -132,7 +144,7 @@ export default function ProductForm({ edit, updateData }) {
             value={form.precio}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <FormControl sx={{ m: 1, minWidth: 210 }}>
             <InputLabel id="demo-simple-select-autowidth-label">
               Categoria
@@ -153,7 +165,7 @@ export default function ProductForm({ edit, updateData }) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <label>Subir imagen</label>
           <label htmlFor="icon-button-file">
             <Input
@@ -163,6 +175,7 @@ export default function ProductForm({ edit, updateData }) {
               id="icon-button-file"
               type="file"
               value={form.imagen}
+              
             />
             <IconButton
               color="primary"
@@ -174,13 +187,15 @@ export default function ProductForm({ edit, updateData }) {
           </label>
         </Grid>
         <Grid item xs={12} md={12}>
+        <Link to="/admin">
           <Button
             onClick={handleSubmit}
             variant="contained"
             endIcon={<SaveIcon />}
           >
-            Guardar
+            guardar
           </Button>
+          </Link>
         </Grid>
 
         <Grid item xs={12} md={12}>

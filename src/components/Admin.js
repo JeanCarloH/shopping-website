@@ -8,10 +8,12 @@ import {
 import Message from "./Message";
 import Loader from "./Loader";
 import { Outlet } from "react-router-dom";
+import ProductForm from "./ProductForm";
 
 function Admin() {
   const [state, dispatch] = useReducer(productReducer, productInitialState);
   const { db } = state;
+  const [edit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   let api = helpHttp();
@@ -98,6 +100,7 @@ function Admin() {
   return (
     <>
       <h2></h2>
+    
       {loading && <Loader />}
       {error && (
         <Message
@@ -105,7 +108,7 @@ function Admin() {
           bgColor="#dc3545"
         />
       )}
-      <Outlet context={{ db, createData, deleteData}} />
+      <Outlet context={{ db, createData, deleteData, updateData}} />
     </>
   );
 }
