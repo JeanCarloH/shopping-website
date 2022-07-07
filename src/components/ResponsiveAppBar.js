@@ -16,6 +16,7 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
+import MainFeaturedPost from "./MainFeaturedPost";
 
 const pages = [
   {
@@ -40,6 +41,15 @@ const pages = [
   },
 ];
 
+const mainFeaturedPost = {
+  title: "Jean Carlo Herrera Delgado",
+  description: "A continuación se podrán ver diferentes cosas personales 🤠.",
+  image: "./assets/img/Bienvenidos.png",
+  imageText: "main image description",
+  linkText: "Continue reading…",
+};
+
+
 const ResponsiveAppBar = ({ numProducts }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -52,11 +62,12 @@ const ResponsiveAppBar = ({ numProducts }) => {
   };
 
   return (
+    
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-
+          <Link to="/Home">
           <Typography
             variant="h6"
             noWrap
@@ -72,9 +83,9 @@ const ResponsiveAppBar = ({ numProducts }) => {
               textDecoration: "none",
             }}
           >
-            WebShop
+            WebShopxd
           </Typography>
-
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -170,6 +181,9 @@ const ResponsiveAppBar = ({ numProducts }) => {
         </Toolbar>
       </Container>
     </AppBar>
+
   );
+
+ 
 };
 export default ResponsiveAppBar;

@@ -56,7 +56,7 @@ export default function EnableColorOnDarkAppBar() {
 
         
         <AppBar position="static" color="primary" enableColorOnDark>
-        {appBarLabel("WebShopp","Admin")}
+        {appBarLabel("WebShop","Administrador")}
         
        
       </AppBar>

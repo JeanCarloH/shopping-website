@@ -6,6 +6,7 @@ import Shopping from "./components/Shopping";
 import Categoria from "./components/Categoria";
 import ProductTable from "./components/ProductTable";
 import ProductForm from "./components/ProductForm";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
             path="/mascotas"
             element={<Categoria categoria={5} nombre="Mascotas" />}
           />
+        </Route>
+        <Route exact path="/Home" element={<Home/> } >
         </Route>
         <Route exact path="/admin" element={<Admin />}>
           <Route exact path="/admin" element={<ProductTable />} />

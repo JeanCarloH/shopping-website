@@ -15,7 +15,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2";
 
 
 const initialForm = {
@@ -35,6 +35,9 @@ export default function ProductForm({ edit }) {
   const [form, setForm] = useState(initialForm);
   const { id } = useParams();
   const [selectedFile, setSelectedFile] = useState(null);
+
+
+
   useEffect(() => {
     if (edit) {
       const product = db.find((item) => item.id == id);
@@ -122,6 +125,7 @@ export default function ProductForm({ edit }) {
       noValidate
       autoComplete="off"
     >
+        <EnableColorOnDarkAppBar2 />
       <Grid container textAlign="center">
         <Grid item xs={12} md={12}>
           <h2>Registre su articulo acá</h2>
