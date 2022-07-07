@@ -15,7 +15,7 @@ export function productReducer(state, action) {
     case TYPES.CREAR_PRODUCTO: {
       return {
         ...state,
-        db: [...state.db, action.payload],
+        db: [action.payload, ...state.db],
       };
     }
     //Carrito

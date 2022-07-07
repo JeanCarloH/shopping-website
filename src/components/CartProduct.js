@@ -19,7 +19,7 @@ export default function CartProduct({
         component="img"
         alt="green iguana"
         height="140"
-        image="https://picsum.photos/200/300"
+        src={product.imagenData}
       />
       <CardContent>
         <Typography gutterBottom variant="body1" component="div">

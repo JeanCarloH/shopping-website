@@ -4,7 +4,7 @@ import StoreProduct from "./StoreProduct";
 
 function Categoria({ nombre, categoria }) {
   const { db, addProduct } = useOutletContext();
-  const products = db.filter((product) => product.categoria === categoria);
+  const products = db.filter((product) => product.categoria == categoria);
 
   return (
     <>

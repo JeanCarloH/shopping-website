@@ -10,9 +10,9 @@ export default function StoreProduct({ addProduct, product }) {
     <Card sx={{ m: 2 }}>
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt={product.imagen}
         height="140"
-        image="https://picsum.photos/200/300"
+        src={product.imagenData}
       />
       <CardContent>
         <Tooltip title="Agregar al carrito">
