@@ -16,6 +16,8 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+
+
 const initialForm = {
   id: null,
   nombre: "",
@@ -24,6 +26,7 @@ const initialForm = {
   precio: "",
   categoria: "",
   imagen: "",
+  imagenData: "",
 };
 
 export default function ProductForm({ edit }) {
@@ -31,7 +34,7 @@ export default function ProductForm({ edit }) {
 
   const [form, setForm] = useState(initialForm);
   const { id } = useParams();
-
+  const [selectedFile, setSelectedFile] = useState(null);
   useEffect(() => {
     if (edit) {
       const product = db.find((item) => item.id == id);
@@ -43,6 +46,22 @@ export default function ProductForm({ edit }) {
     const product = db.find((item) => item.id == id);
     setForm(product);
   }*/
+
+  function file(e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(event) {
+      setForm({
+        ...form,
+        imagen: e.target.files[0].name,
+        //callback(reader.result);
+        imagenData:reader.result
+        
+      });
+    };
+  
+    reader.readAsDataURL(file);
+  }
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -170,11 +189,11 @@ export default function ProductForm({ edit }) {
           <label htmlFor="icon-button-file">
             <Input
               name="imagen"
-              onChange={handleChange}
+              onChange={file}
               accept="image/*"
               id="icon-button-file"
               type="file"
-              value={form.imagen}
+              //value=
               
             />
             <IconButton
@@ -185,6 +204,8 @@ export default function ProductForm({ edit }) {
               <PhotoCamera />
             </IconButton>
           </label>
+       
+        
         </Grid>
         <Grid item xs={12} md={12}>
         <Link to="/admin">
