@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import CartProduct from "./CartProduct";
-
+import StoreProduct from "./StoreProduct";
 function CarritoDeCompra() {
   const { cart, addProduct, deleteOne, deleteAll, clearCart } =
     useOutletContext();
@@ -14,6 +14,9 @@ function CarritoDeCompra() {
           </Typography>
           <Button variant="contained" align="center" onClick={clearCart}>
             Limpiar carrito
+          </Button>
+          <Button variant="contained" align="left"  >
+            Comprar
           </Button>
         </Grid>
       </Grid>
@@ -28,6 +31,7 @@ function CarritoDeCompra() {
                 product={product}
                 addProduct={addProduct}
               />
+
             </Grid>
           ))}
         </Grid>

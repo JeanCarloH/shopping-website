@@ -5,13 +5,15 @@ import Typography from "@mui/material/Typography";
 import { CardContent, IconButton, Tooltip } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 
-export default function StoreProduct({ addProduct, product }) {
+export default function StoreProduct({ addProduct, product }) { //la tarjeta
   return (
+
+    
     <Card sx={{ m: 2 }}>
       <CardMedia
         component="img"
         alt={product.imagen}
-        height="140"
+        height="280"
         src={product.imagenData}
       />
       <CardContent>
@@ -20,6 +22,9 @@ export default function StoreProduct({ addProduct, product }) {
             <AddBoxIcon />
           </IconButton>
         </Tooltip>
+        <Typography gutterBottom variant="h5" component="div">
+        {product.cantidadSeleccionada}
+        </Typography>
         <Typography gutterBottom variant="h5" component="div">
           {product.nombre}
         </Typography>

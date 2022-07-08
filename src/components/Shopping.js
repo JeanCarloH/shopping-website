@@ -6,6 +6,7 @@ import {
   productInitialState,
   productReducer,
 } from "../reducers/productReducer";
+import MainFeaturedPost from "./MainFeaturedPost";
 import Message from "./Message";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 function Shopping() {
@@ -13,6 +14,8 @@ function Shopping() {
   const [error, setError] = useState(null);
   const { db, cart } = state;
   let url = "http://localhost:5000/productos";
+ 
+  
 
   useEffect(() => {
     helpHttp()
@@ -40,7 +43,9 @@ function Shopping() {
 
   return (
     <>
+
       <ResponsiveAppBar numProducts={state.cart.length} />
+    
       {error && (
         <Message
           msg={`Error ${error.status}: ${error.statusText}`}
@@ -48,8 +53,9 @@ function Shopping() {
         />
       )}
       <Outlet
-        context={{ db, cart, addProduct, deleteOne, deleteAll, clearCart }}
+        context={{ db, cart, addProduct, deleteOne, deleteAll, clearCart}}
       />
+    
     </>
   );
 }

@@ -55,7 +55,7 @@ export default function EnableColorOnDarkAppBar() {
     <ThemeProvider theme={darkTheme}>
 
         
-        <AppBar position="static" color="primary" enableColorOnDark>
+        <AppBar position="sticky" color="primary" >
         {appBarLabel("WebShop","Administrador")}
         
        

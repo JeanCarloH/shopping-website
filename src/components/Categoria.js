@@ -1,13 +1,22 @@
 import { Grid, Typography } from "@mui/material";
+import { useEffect, useState} from "react";
 import { useOutletContext } from "react-router-dom";
 import StoreProduct from "./StoreProduct";
+import MainFeaturedPost from "./MainFeaturedPost";
 
-function Categoria({ nombre, categoria }) {
-  const { db, addProduct } = useOutletContext();
+function Categoria({ nombre, categoria,image,imagetext }) {
+  const { cart, db, addProduct } = useOutletContext();
   const products = db.filter((product) => product.categoria == categoria);
+
+const post={
+  image:image,
+  imagetext:imagetext,
+
+}
 
   return (
     <>
+      <MainFeaturedPost post={post}/>
       <Typography variant="h5" align="center">
         Categoria: {nombre}
       </Typography>
@@ -18,8 +27,10 @@ function Categoria({ nombre, categoria }) {
               <StoreProduct addProduct={addProduct} product={product} />
             </Grid>
           ))}
+      
         </Grid>
       )}
+      
     </>
   );
 }

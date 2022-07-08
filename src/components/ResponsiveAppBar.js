@@ -17,6 +17,7 @@ import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import MainFeaturedPost from "./MainFeaturedPost";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const pages = [
   {
@@ -49,6 +50,12 @@ const mainFeaturedPost = {
   linkText: "Continue reading…",
 };
 
+const post={
+  image:"logo/Bienvenidos.png",
+  imagetext:"bienvenida",
+
+}
+
 
 const ResponsiveAppBar = ({ numProducts }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -60,10 +67,18 @@ const ResponsiveAppBar = ({ numProducts }) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+      primary: {
+        main: "#2196f3",
+      },
+    },
+  });
 
   return (
-    
-    <AppBar position="static">
+    <ThemeProvider theme={darkTheme}>
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -79,7 +94,7 @@ const ResponsiveAppBar = ({ numProducts }) => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "primary",
               textDecoration: "none",
             }}
           >
@@ -180,10 +195,11 @@ const ResponsiveAppBar = ({ numProducts }) => {
           </Box>
         </Toolbar>
       </Container>
+     
     </AppBar>
-
+    </ThemeProvider>
   );
-
+ 
  
 };
 export default ResponsiveAppBar;

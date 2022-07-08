@@ -12,7 +12,7 @@ const Home = () =>{
     return(
         <>
               <ResponsiveAppBar/>
-          <MainFeaturedPost post={mainFeaturedPost}/>
+         <MainFeaturedPost post={mainFeaturedPost}/>
         </>
 
      

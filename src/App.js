@@ -12,7 +12,7 @@ function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route exact path="/" element={<Shopping />}>
+        <Route exact path="/" element={<Shopping />} image="logo/Bienvenidos.png" imagetext="bienvenidos" >
           <Route
             exact
             path="/carrito-de-compras"
@@ -21,27 +21,27 @@ function App() {
           <Route
             exact
             path="/electrodomesticos"
-            element={<Categoria categoria={1} nombre="Electrodomesticos" />}
+            element={<Categoria categoria={1} nombre="Electrodomesticos" image="logo/electrodomesticos.png" imagetext="electrodomestico" />}
           />
           <Route
             exact
             path="/ropa"
-            element={<Categoria categoria={2} nombre="Ropa" />}
+            element={<Categoria categoria={2} nombre="Ropa" image="logo/ropa.png" imagetext="ropa" />}
           />
           <Route
             exact
             path="/vehiculos"
-            element={<Categoria categoria={3} nombre="Vehiculos" />}
+            element={<Categoria categoria={3} nombre="Vehiculos" image="logo/vehiculos.png" imagetext="vehiculo"  />}
           />
           <Route
             exact
             path="/alimentos"
-            element={<Categoria categoria={4} nombre="Alimentos" />}
+            element={<Categoria categoria={4} nombre="Alimentos" image="logo/alimentos.png" imagetext="alimento" />}
           />
           <Route
             exact
             path="/mascotas"
-            element={<Categoria categoria={5} nombre="Mascotas" />}
+            element={<Categoria categoria={5} nombre="Mascotas" image="logo/mascotas.png" imagetext="mascotas" />}
           />
         </Route>
         <Route exact path="/Home" element={<Home/> } >

@@ -27,6 +27,7 @@ const initialForm = {
   categoria: "",
   imagen: "",
   imagenData: "",
+  cantidadSeleccionada:"",
 };
 
 export default function ProductForm({ edit }) {

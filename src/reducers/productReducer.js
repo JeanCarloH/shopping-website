@@ -20,7 +20,7 @@ export function productReducer(state, action) {
     }
     //Carrito
     case TYPES.AGREGAR_PRODUCTO: {
-      let newProduct = state.db.find(
+      let newProduct = state.db.find(  //guarda el ide del action con id de la base de datos para mirar que es el mismo
         (product) => product.id === action.payload
       );
       let productInCart = state.cart.find(
@@ -34,10 +34,13 @@ export function productReducer(state, action) {
                 ? { ...product, cantidadCarrito: product.cantidadCarrito + 1 }
                 : product
             ),
+    
           }
+          
         : {
             ...state,
             cart: [...state.cart, { ...newProduct, cantidadCarrito: 1 }],
+          //  db: [...state.db, { ...newProduct, cantidaSeleccionada: 1 }],
           };
     }
     case TYPES.ELIMINAR_UNO: {
