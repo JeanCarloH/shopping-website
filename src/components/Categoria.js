@@ -24,7 +24,7 @@ const post={
         <Grid container justifyContent="center">
           {products.map((product, index) => (
             <Grid item key={index} xs={12} md={4} lg={3}>
-              <StoreProduct addProduct={addProduct} product={product} />
+              <StoreProduct addProduct={addProduct} product={product} cart={cart}/>
             </Grid>
           ))}
       

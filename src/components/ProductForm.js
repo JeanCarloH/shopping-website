@@ -11,11 +11,12 @@ import {
   Select,
   styled,
 } from "@mui/material";
-import { PhotoCamera } from "@mui/icons-material";
+import { Margin, PhotoCamera } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2";
+import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2"
+import { createTheme,ThemeProvider } from '@mui/material/styles';;
 
 
 const initialForm = {
@@ -27,7 +28,7 @@ const initialForm = {
   categoria: "",
   imagen: "",
   imagenData: "",
-  cantidadSeleccionada:"",
+ 
 };
 
 export default function ProductForm({ edit }) {
@@ -37,8 +38,8 @@ export default function ProductForm({ edit }) {
   const { id } = useParams();
   const [selectedFile, setSelectedFile] = useState(null);
 
-
-
+ 
+  const productos = db.find((item) => item.id == id);
   useEffect(() => {
     if (edit) {
       const product = db.find((item) => item.id == id);
@@ -66,6 +67,17 @@ export default function ProductForm({ edit }) {
   
     reader.readAsDataURL(file);
   }
+  const temaNuevo = createTheme({
+    palette: {
+      primary: {
+        main: '#1b5e20',
+      },
+      secondary: {
+        main: '#b71c1c',
+      },
+    },
+  }
+  )
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -189,7 +201,9 @@ export default function ProductForm({ edit }) {
             </Select>
           </FormControl>
         </Grid>
+     
         <Grid item xs={12} md={12}>
+       
           <label>Subir imagen</label>
           <label htmlFor="icon-button-file">
             <Input
@@ -209,15 +223,22 @@ export default function ProductForm({ edit }) {
               <PhotoCamera />
             </IconButton>
           </label>
-       
-        
-        </Grid>
+      </Grid>
+      <Grid sx  ={{display:"block", margin:"auto"}}> 
+      <img src={`${form.imagenData}`} 
+                  alt={form.nombre}
+                  height="280"
+                  margi
+                  />
+                  </Grid>
+          <ThemeProvider theme={temaNuevo}>
         <Grid item xs={12} md={12}>
         <Link to="/admin">
           <Button
             onClick={handleSubmit}
             variant="contained"
             endIcon={<SaveIcon />}
+            color="primary"
           >
             guardar
           </Button>
@@ -226,9 +247,14 @@ export default function ProductForm({ edit }) {
 
         <Grid item xs={12} md={12}>
           <Link to="/admin">
-            <Button variant="contained">regresar</Button>
+            <Button variant="contained"
+            color="secondary"
+             >
+              regresar
+              </Button>
           </Link>
         </Grid>
+        </ThemeProvider>
       </Grid>
     </Box>
   );

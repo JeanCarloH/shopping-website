@@ -26,15 +26,12 @@ export default function CartProduct({
           Cantidad seleccionada: {product.cantidadCarrito}
         </Typography>
         <Tooltip title="Agregar otro">
-      
-         {product.cantidadCarrito < product.cantidad ? <IconButton onClick={() => addProduct(product.id)} color="primary" >
+       {product.cantidadCarrito < product.cantidad ? <IconButton onClick={() => addProduct(product.id)} color="primary" >
           <AddBoxIcon />
         </IconButton> 
         : <IconButton onClick={() => addProduct(product.id)} color="primary" disabled >
           <AddBoxIcon />
         </IconButton>} 
-            
-      
         </Tooltip>
         <Tooltip title="Eliminar uno">
           <IconButton onClick={() => deleteOne(product.id)} color="primary">

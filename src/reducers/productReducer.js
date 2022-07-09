@@ -34,13 +34,18 @@ export function productReducer(state, action) {
                 ? { ...product, cantidadCarrito: product.cantidadCarrito + 1 }
                 : product
             ),
-    
+        //    ...state,
+            //   db: state.db.map((product) =>
+             //    product.id === productInCart.id
+            //       ? { ...product, cantidadSeleccionada: product.cantidadSeleccionada + 1 }
+            //       : product
+          //     ),
           }
           
         : {
             ...state,
             cart: [...state.cart, { ...newProduct, cantidadCarrito: 1 }],
-          //  db: [...state.db, { ...newProduct, cantidaSeleccionada: 1 }],
+           // db: [...state.db, { ...newProduct, cantidaSeleccionada: 1 }],
           };
     }
     case TYPES.ELIMINAR_UNO: {

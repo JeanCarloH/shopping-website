@@ -73,7 +73,10 @@ export default function ProductTable() {
                     {product.categoria}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {product.imagen}
+                  <img src={`${product.imagenData}`} 
+                  alt={product.nombre}
+                  height="280"
+                  />
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     <Link to={`/admin/editar/${product.id}`}>

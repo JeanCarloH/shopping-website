@@ -16,6 +16,8 @@ function MainFeaturedPost(props) {
         backgroundColor: "grey.800",
         color: "#fff",
         mb: 4,
+        width:{xs:"100%"},
+        height:{xs:"auto"},
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -45,8 +47,9 @@ function MainFeaturedPost(props) {
           <Box
             sx={{
               position: "relative",
-              p: { xs: 3, md: 38 },
-              pr: { md: 0 },
+              p: { xs: 20, md: 38 },
+
+              pr: { xs: 0, md: 12},
             }}
           >
             <Typography
