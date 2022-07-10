@@ -9,10 +9,11 @@ import ProductForm from "./components/ProductForm";
 import Home from "./components/Home";
 
 function App() {
+  const arregloImages=["logo/Bienvenidos.png","logo/ropa"]
   return (
     <HashRouter>
       <Routes>
-        <Route exact path="/" element={<Shopping />} image="logo/Bienvenidos.png" imagetext="bienvenidos" >
+        <Route exact path="/" element={<Shopping />} image={arregloImages} imagetext="bienvenidos" >
           <Route
             exact
             path="/carrito-de-compras"
@@ -21,7 +22,7 @@ function App() {
           <Route
             exact
             path="/electrodomesticos"
-            element={<Categoria categoria={1} nombre="Electrodomesticos" image="logo/electrodomesticos.png" imagetext="electrodomestico" />}
+            element={<Categoria categoria={1} nombre="Electrodomesticos"image="logo/electrodomesticos.png" imagetext="electrodomestico" />}
           />
           <Route
             exact
@@ -44,7 +45,7 @@ function App() {
             element={<Categoria categoria={5} nombre="Mascotas" image="logo/mascotas.png" imagetext="mascotas" />}
           />
         </Route>
-        <Route exact path="/Home" element={<Home/> } >
+        <Route exact path="/home" element={<Home/> } >
         </Route>
         <Route exact path="/admin" element={<Admin />}>
           <Route exact path="/admin" element={<ProductTable />} />

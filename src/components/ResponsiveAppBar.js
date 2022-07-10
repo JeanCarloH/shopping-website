@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import MainFeaturedPost from "./MainFeaturedPost";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
+import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
 const pages = [
   {
     nombre: "Electrodomesticos",
@@ -77,6 +77,8 @@ const ResponsiveAppBar = ({ numProducts }) => {
   });
 
   return (
+    <>
+
     <ThemeProvider theme={darkTheme}>
     <AppBar position="sticky">
       <Container maxWidth="xl">
@@ -198,8 +200,10 @@ const ResponsiveAppBar = ({ numProducts }) => {
      
     </AppBar>
     </ThemeProvider>
+    </>
   );
  
- 
+  
 };
+
 export default ResponsiveAppBar;

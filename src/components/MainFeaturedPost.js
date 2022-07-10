@@ -7,10 +7,13 @@ import Box from "@mui/material/Box";
 
 
 function MainFeaturedPost(props) {
-  const { post } = props;
-
+  const { post, arrayimages,numero } = props;
+ 
   return (
+    
     <Paper
+  
+    
       sx={{
         position: "relative",
         backgroundColor: "grey.800",
@@ -21,15 +24,15 @@ function MainFeaturedPost(props) {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        backgroundImage: `url(${post.image})`,
+        backgroundImage: `url(${arrayimages[numero]})`,
       }}
     >
       {/* Increase the priority of the hero background image */}
       {
         <img
           style={{ display: "none" }}
-          src={post.image}
-          alt={post.imageText}
+          src={arrayimages[numero]}
+         
         />
       }
       <Box
@@ -76,6 +79,7 @@ function MainFeaturedPost(props) {
         </Grid>
       </Grid>
     </Paper>
+    
   );
 }
 
