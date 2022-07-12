@@ -133,17 +133,17 @@ export default function ProductForm({ edit }) {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        "& .MuiTextField-root": { m: 1, width: "25ch"},
       }}
       noValidate
       autoComplete="off"
     >
         <EnableColorOnDarkAppBar2 />
-      <Grid container textAlign="center">
+      <Grid container textAlign="center" sx={{ display:"inline-flex"}}>
         <Grid item xs={12} md={12}>
           <h2>Registre su articulo acá</h2>
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={3}>
           <TextField
             name="nombre"
             onChange={handleChange}
@@ -152,7 +152,7 @@ export default function ProductForm({ edit }) {
             value={form.nombre}
           />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={3}>
           <TextField
             name="descripcion"
             onChange={handleChange}
@@ -161,7 +161,7 @@ export default function ProductForm({ edit }) {
             value={form.descripcion}
           />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={3}>
           <TextField
             name="cantidad"
             onChange={handleChange}
@@ -171,7 +171,7 @@ export default function ProductForm({ edit }) {
             value={form.cantidad}
           />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={3}>
           <TextField
             name="precio"
             onChange={handleChange}
@@ -180,7 +180,7 @@ export default function ProductForm({ edit }) {
             value={form.precio}
           />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={3}>
           <FormControl sx={{ m: 1, minWidth: 210 }}>
             <InputLabel id="demo-simple-select-autowidth-label">
               Categoria
@@ -202,7 +202,7 @@ export default function ProductForm({ edit }) {
           </FormControl>
         </Grid>
      
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={3}>
        
           <label>Subir imagen</label>
           <label htmlFor="icon-button-file">
@@ -224,15 +224,27 @@ export default function ProductForm({ edit }) {
             </IconButton>
           </label>
       </Grid>
-      <Grid sx  ={{display:"block", margin:"auto"}}> 
+      <Grid item md={12} sx  ={{display:"block", margin:"auto"}} > 
       <img src={`${form.imagenData}`} 
                   alt={form.nombre}
-                  height="280"
+                  height="400"
+                  width="auto"
                   margi
                   />
                   </Grid>
           <ThemeProvider theme={temaNuevo}>
-        <Grid item xs={12} md={12}>
+
+          <Grid item xs={12} md={6}>
+          <Link to="/admin">
+            <Button variant="contained"
+            color="secondary"
+             >
+              regresar
+              </Button>
+          </Link>
+        </Grid>
+
+        <Grid item xs={12} md={6}>
         <Link to="/admin">
           <Button
             onClick={handleSubmit}
@@ -245,15 +257,7 @@ export default function ProductForm({ edit }) {
           </Link>
         </Grid>
 
-        <Grid item xs={12} md={12}>
-          <Link to="/admin">
-            <Button variant="contained"
-            color="secondary"
-             >
-              regresar
-              </Button>
-          </Link>
-        </Grid>
+       
         </ThemeProvider>
       </Grid>
     </Box>

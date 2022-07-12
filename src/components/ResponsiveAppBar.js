@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import MainFeaturedPost from "./MainFeaturedPost";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
+
 const pages = [
   {
     nombre: "Electrodomesticos",
@@ -84,11 +84,11 @@ const ResponsiveAppBar = ({ numProducts }) => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Link to="/Home">
+          <Link to="/">
           <Typography
             variant="h6"
             noWrap
-            component="a"
+            //component="a"
             href="/"
             sx={{
               mr: 2,
