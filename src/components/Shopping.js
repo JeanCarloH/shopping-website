@@ -37,8 +37,14 @@ function Shopping() {
   const [busqueda, setBusqueda] = useState(null);
   const { db, cart } = state;
   const [page, setPage] = React.useState(1);
+  const [pageStart, setPageStart] = React.useState(0);
+  const [pageEnd, setPageEnd] = React.useState(9);
+  const [valueCaptured, setvalueCaptured] = React.useState(1);
   let url = "http://localhost:5000/productos";
 
+
+
+  
   const social = [
  
     {
@@ -116,7 +122,25 @@ function Shopping() {
   
   }
   const handleChange2 = (event, value) => {
-    setPage(value);
+    if(value==1){
+      setPage(value)
+      setvalueCaptured(value)
+      setPageStart(0)
+      setPageEnd(9)
+    }else if(value==2){
+      setPage(value)
+      setvalueCaptured(value)
+      setPageEnd(19)
+      setPageStart(10)
+      
+    }else if(value==3){
+      setPage(value)
+      setvalueCaptured(value)
+      setPageEnd(29)
+      setPageStart(20)
+      
+    }
+ 
   };
 
 
@@ -155,7 +179,7 @@ function Shopping() {
           bgColor="#dc3545"
         />
       )}
-      {location.pathname == "/" ? 
+      {location.pathname == "/" &&
        <Search>
        <SearchIconWrapper>
          <SearchIcon />
@@ -168,10 +192,7 @@ function Shopping() {
          autoFocus
        />
      </Search>
-     :
-     <Outlet
-          context={{ db, cart, addProduct, deleteOne, deleteAll, clearCart }}
-        />
+     
 
       }
      
@@ -189,27 +210,32 @@ function Shopping() {
           </Grid>
           ))
            
-         : db.map((product, index) => (
-            <Grid item key={index} xs={12} md={4} lg={3}>
+         :db.filter((product,index) => (index>=pageStart && index<=pageEnd)).map((product, index) => (
+            
+            <Grid item key={index} xs={12} md={4} lg={2.4}>
+              
               <StoreProduct
                 addProduct={addProduct}
                 product={product}
                 cart={cart}
               />
             </Grid>
-          ))}
+          ))
+          }
         </Grid>
+       
       ) : (
         <Outlet
           context={{ db, cart, addProduct, deleteOne, deleteAll, clearCart }}
         />
       )}
-
+  {location.pathname == "/" && (
           <Stack spacing={2}>
       <Typography>Page: {page}</Typography>
       <Pagination count={10} page={page} onChange={handleChange2} />
     </Stack>
-
+  )}
+    
        <Footer
           title="Gracias por visitar WEBSHOP! "
           description="Este sitio web fue desarrollado con ReactJs"

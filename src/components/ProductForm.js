@@ -15,9 +15,12 @@ import { Margin, PhotoCamera } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2"
-import { createTheme,ThemeProvider } from '@mui/material/styles';;
-
+import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+//alerta
+import BasicAlerts from "./BasicAlerts";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const initialForm = {
   id: null,
@@ -102,9 +105,16 @@ export default function ProductForm({ edit }) {
     } else {
       if (edit) {
         updateData(form);
-        
+        <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert severity="success">Se ha guardado correctamente!</Alert>
+       </Stack>
+        alert("Datos actualizados exitosamente");
       } else {
         createData(form);
+        <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert severity="success">Se ha guardado correctamente!</Alert>
+       </Stack>
+        alert("Datos creados exitosamente");
       }
       handleReset();
     }
@@ -255,6 +265,7 @@ export default function ProductForm({ edit }) {
             guardar
           </Button>
           </Link>
+          
         </Grid>
 
        

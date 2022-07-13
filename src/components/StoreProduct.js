@@ -4,11 +4,14 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardContent, IconButton, Tooltip } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import HoverRating from "./HoverRating";
 
 export default function StoreProduct({ cart, addProduct, product }) {
   //la tarjeta
   const cartProduct = cart.find((item) => item.id == product.id);
   return (
+    <>
+    
     <Card sx={{ m: 2 }}>
       <CardMedia
         component="img"
@@ -16,11 +19,12 @@ export default function StoreProduct({ cart, addProduct, product }) {
         height="280"
         src={product.imagenData}
       />
+     
       <CardContent>
        
           <Tooltip title="Agregar al carrito">
             
-            
+          
               <IconButton
                 onClick={() => addProduct(product.id)}
                 color="primary"
@@ -36,7 +40,7 @@ export default function StoreProduct({ cart, addProduct, product }) {
               </IconButton>
             
           </Tooltip>
-        
+          <HoverRating/>
         <Typography gutterBottom variant="h5" component="div">
           {cartProduct ? cartProduct.cantidadCarrito : 0}
         </Typography>
@@ -61,5 +65,6 @@ export default function StoreProduct({ cart, addProduct, product }) {
         </Typography>
       </CardContent>
     </Card>
+    </>
   );
 }
