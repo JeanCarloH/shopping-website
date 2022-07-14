@@ -24,6 +24,7 @@ function MainFeaturedPost(props) {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        transition: "background-image 2s ease-in-out",
         backgroundImage: `url(${arrayimages[numero]})`,
       }}
     >
@@ -55,27 +56,7 @@ function MainFeaturedPost(props) {
               pr: { xs: 0, md: 12},
             }}
           >
-            <Typography
-              component="h1"
-              variant="h4"
-              text-align= "left"  //como poner texto a la izq
-              color="inherit"
-              style={{ backgroundColor: "#00000085" }}
-              gutterBottom
-            >
-              {post.title}
-            </Typography>
-            <Typography
-              variant="h5"
-              color="inherit"
-              style={{ backgroundColor: "#00000085" }}
-              paragraph
-            >
-              {post.description}
-            </Typography>
-
-
-          </Box>
+        </Box>
         </Grid>
       </Grid>
     </Paper>
@@ -85,11 +66,9 @@ function MainFeaturedPost(props) {
 
 MainFeaturedPost.propTypes = {
   post: PropTypes.shape({
-    description: PropTypes.string,
     image: PropTypes.string,
     imageText: PropTypes.string,
     linkText: PropTypes.string,
-    title: PropTypes.string,
   }).isRequired,
 };
 

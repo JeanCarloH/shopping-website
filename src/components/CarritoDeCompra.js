@@ -1,10 +1,21 @@
 import { Button, Grid, Typography } from "@mui/material";
+import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import CartProduct from "./CartProduct";
 import StoreProduct from "./StoreProduct";
 function CarritoDeCompra() {
-  const { cart, addProduct, deleteOne, deleteAll, clearCart } =
+  const { cart, addProduct, deleteOne, deleteAll, clearCart} =
     useOutletContext();
+  let productosTotales="";
+
+  {cart &&
+    cart.map((product,index) =>(
+      productosTotales+=`
+      nombre del producto:+${product.nombre}+
+      cantidad:+${product.cantidadCarrito}+`
+    ))
+  }
+console.log(productosTotales)
   return (
     <>
       <Grid container justifyContent="center">
@@ -15,9 +26,10 @@ function CarritoDeCompra() {
           <Button variant="contained" align="center" onClick={clearCart}>
             Limpiar carrito
           </Button>
-          <Button variant="contained" align="left"  >
-            Comprar
-          </Button>
+
+          <Button variant="contained" align="left" a href={`https://api.whatsapp.com/send?text=${productosTotales}&phone=573004596117`}  target="_blank" >
+              Comprar
+            </Button>
         </Grid>
       </Grid>
 

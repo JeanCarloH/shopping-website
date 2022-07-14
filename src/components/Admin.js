@@ -9,6 +9,7 @@ import Message from "./Message";
 import Loader from "./Loader";
 import { Outlet } from "react-router-dom";
 import ProductForm from "./ProductForm";
+import BasicAlerts from "./BasicAlerts";
 
 function Admin() {
   const [state, dispatch] = useReducer(productReducer, productInitialState);
@@ -16,6 +17,7 @@ function Admin() {
   const [edit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [verify, setVerify] = useState(false);
   let api = helpHttp();
   let url = "http://localhost:5000/productos";
 
@@ -46,8 +48,10 @@ function Admin() {
       if (!res.err) {
         dispatch({ type: TYPES.CREAR_PRODUCTO, payload: res });
         setError(null);
+        setVerify(true);
       } else {
         setError(res);
+        setVerify(false);
       }
     });
   };
@@ -67,8 +71,10 @@ function Admin() {
         //let newData = db.map((el) => (el.id === data.id ? data : el));
         //setDb(newData)
         dispatch({ type: TYPES.UPDATE_DATA, payload: data });
+        setVerify(true);
       } else {
         setError(res);
+        setVerify(false);
       }
     });
   };
@@ -97,18 +103,24 @@ function Admin() {
       return;
     }
   };
+  const verificador=() => {setVerify(false)}
+
   return (
     <>
       <h2></h2>
     
       {loading && <Loader />}
+     
       {error && (
         <Message
           msg={`Error ${error.status}: ${error.statusText}`}
           bgColor="#dc3545"
         />
       )}
-      <Outlet context={{ db, createData, deleteData, updateData}} />
+
+    
+      <Outlet context={{ db, createData, deleteData, updateData, verify, verificador}} />
+      
     </>
   );
 }

@@ -39,7 +39,9 @@ export default function ProductForm({ edit }) {
 
   const [form, setForm] = useState(initialForm);
   const { id } = useParams();
+
   const [selectedFile, setSelectedFile] = useState(null);
+ 
 
  
   const productos = db.find((item) => item.id == id);
@@ -103,18 +105,16 @@ export default function ProductForm({ edit }) {
       alert("Datos incompletos.");
       return;
     } else {
+     
       if (edit) {
         updateData(form);
-        <Stack sx={{ width: '100%' }} spacing={2}>
-        <Alert severity="success">Se ha guardado correctamente!</Alert>
-       </Stack>
-        alert("Datos actualizados exitosamente");
+       
+        
+       // alert("Datos actualizados exitosamente");
       } else {
         createData(form);
-        <Stack sx={{ width: '100%' }} spacing={2}>
-        <Alert severity="success">Se ha guardado correctamente!</Alert>
-       </Stack>
-        alert("Datos creados exitosamente");
+        
+        //alert("Datos creados exitosamente");
       }
       handleReset();
     }
@@ -265,7 +265,7 @@ export default function ProductForm({ edit }) {
             guardar
           </Button>
           </Link>
-          
+        
         </Grid>
 
        

@@ -28,7 +28,9 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
+//
+import CloseIcon from '@mui/icons-material/Close';
+import Close from "@mui/icons-material/Close";
 
 
 function Shopping() {
@@ -109,9 +111,9 @@ function Shopping() {
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        width: '12ch',
+        width: '158ch',
         '&:focus': {
-          width: '20ch',
+          width: '158ch',
         },
       },
     },
@@ -142,6 +144,10 @@ function Shopping() {
     }
  
   };
+
+  const handleChange3 =()=>{
+    setBusqueda(null);
+  }
 
 
   useEffect(() => {
@@ -191,11 +197,31 @@ function Shopping() {
          value={busqueda}
          autoFocus
        />
+        
+
+        {busqueda &&
+            <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+          //  aria-label="open drawer"
+            sx={{ marginRight: 2 }}
+            onClick={handleChange3}
+
+          >
+
+          <CloseIcon/>
+          </IconButton>
+          
+
+        }
+      
+       
+        
      </Search>
      
-
       }
-     
+  
       {location.pathname == "/" ? (
         <Grid container justifyContent="center">
           {busqueda ?

@@ -10,8 +10,11 @@ import Paper from "@mui/material/Paper";
 import { Link, useOutletContext } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box } from "@mui/system";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip,Button } from "@mui/material";
 import EnableColorOnDarkAppBar from "./EnableColorOnDarkAppBar";
+import BasicAlerts from "./BasicAlerts";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,13 +36,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const temaNuevo = createTheme({
+  palette: {
+    primary: {
+      main: '#1b5e20',
+    },
+    secondary: {
+      main: '#b71c1c',
+    },
+  },
+}
+)
+
 export default function ProductTable() {
-  const { db } = useOutletContext();
-  const { deleteData } = useOutletContext();
+  const { db,deleteData,verify,verificador } = useOutletContext();
+
   return (
     <>
       <EnableColorOnDarkAppBar />
-
+      {verify &&
+      <BasicAlerts
+     verificador={verificador}
+      />
+      
+      }
       <TableContainer sx={{ m: 3 }} component={Paper}>
         <Table sx={{ width:"98%" }} aria-label="customized table">
           <TableHead>
@@ -79,12 +99,24 @@ export default function ProductTable() {
                   />
                   </StyledTableCell>
                   <StyledTableCell align="right">
+                  <ThemeProvider theme={temaNuevo}>
                     <Link to={`/admin/editar/${product.id}`}>
-                      <button>editar</button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{width:"100px"}}
+                      
+                    >
+                      Editar
+                    </Button>
                     </Link>
-                    <button onClick={() => deleteData(product.id)}>
-                      eliminar
-                    </button>
+                    <Button variant="contained"
+                    color="secondary"
+                    onClick={() => deleteData(product.id)}
+                    >
+                    Eliminar
+                       </Button>
+                       </ThemeProvider>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
