@@ -6,7 +6,7 @@ import Shopping from "./components/Shopping";
 import Categoria from "./components/Categoria";
 import ProductTable from "./components/ProductTable";
 import ProductForm from "./components/ProductForm";
-import Home from "./components/Home";
+import Login from "./components/Login";
 
 function App() {
   const arregloImages=["logo/Bienvenidos.png","logo/ropa"]
@@ -45,7 +45,7 @@ function App() {
             element={<Categoria categoria={5} nombre="Mascotas" image="logo/mascotas.png" imagetext="mascotas" />}
           />
         </Route>
-        <Route exact path="/home" element={<Home/> } >
+        <Route exact path="/login" element={<Login/> } >
         </Route>
         <Route exact path="/admin" element={<Admin />}>
           <Route exact path="/admin" element={<ProductTable />} />

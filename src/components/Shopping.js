@@ -164,15 +164,30 @@ function Shopping() {
       });
   }, [url]);
 
-  const addProduct = (id) =>
+  const addProduct = (id) =>{
     dispatch({ type: TYPES.AGREGAR_PRODUCTO, payload: id });
+   
+    
+   }
+    
+  
+  const deleteOne = (id) => {
+    dispatch({ type: TYPES.ELIMINAR_UNO, payload: id });
+    //localStorage.removeItem("carrito", JSON.stringify(state.cart));
+  }
 
-  const deleteOne = (id) => dispatch({ type: TYPES.ELIMINAR_UNO, payload: id });
 
-  const deleteAll = (id) =>
+  const deleteAll = (id) =>{
     dispatch({ type: TYPES.ELIMINAR_TODOS, payload: id });
+    //localStorage.removeItem("carrito", JSON.stringify(state.cart));
+  }
+   
 
-  const clearCart = () => dispatch({ type: TYPES.LIMPIAR_CARRITO });
+  const clearCart = () => {
+    dispatch({ type: TYPES.LIMPIAR_CARRITO });
+    localStorage.removeItem("carrito", JSON.stringify(state.cart));
+  }
+
 
   return (
     <>

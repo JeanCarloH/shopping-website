@@ -18,6 +18,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
 import MainFeaturedPost from "./MainFeaturedPost";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import useUser from "./hooks/useUser";
 
 const pages = [
   {
@@ -55,10 +58,19 @@ const post={
   imagetext:"bienvenida",
 
 }
+//const isLogged=true
+
+
 
 
 const ResponsiveAppBar = ({ numProducts }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const {isLogged,logout}= useUser()
+
+  const handleClick = e =>{
+    e.preventDefault()
+    logout()
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -187,13 +199,35 @@ const ResponsiveAppBar = ({ numProducts }) => {
             </Tooltip>
           </Box>
           <Box sx={{ flexGrow: 0, m: 1 }}>
+            
             <Tooltip title="Administrador">
-              <Link to="/admin">
+            <Link to="/admin">
+              <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
+                <SupervisorAccountIcon />
+              </IconButton>
+            </Link>
+          </Tooltip>
+            
+            
+            {isLogged ?
+              <Tooltip title="Cerrar Sesión">
+              <Link to="/">
+                <IconButton sx={{ p: 0, color: grey[50], m: 1 }} onClick={handleClick}>
+                <LogoutIcon />
+                  
+                </IconButton>
+              </Link>
+              </Tooltip>
+              :
+              <Tooltip title="Iniciar Sesión">
+              <Link to="/login">
                 <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
-                  <SupervisorAccountIcon />
+                <LoginIcon />
                 </IconButton>
               </Link>
             </Tooltip>
+            }
+          
           </Box>
         </Toolbar>
       </Container>

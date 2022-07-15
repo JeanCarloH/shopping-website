@@ -22,34 +22,39 @@ export function productReducer(state, action) {
     case TYPES.AGREGAR_PRODUCTO: {
       let newProduct = state.db.find(  //guarda el ide del action con id de la base de datos para mirar que es el mismo
         (product) => product.id === action.payload
+     
       );
       let productInCart = state.cart.find(
         (product) => product.id === newProduct.id
       );
-      return productInCart
-        ? {
+      
+      let object=null;
+        if(productInCart){
+          object= {
             ...state,
             cart: state.cart.map((product) =>
               product.id === productInCart.id
                 ? { ...product, cantidadCarrito: product.cantidadCarrito + 1 }
                 : product
             ),
-        //    ...state,
-            //   db: state.db.map((product) =>
-             //    product.id === productInCart.id
-            //       ? { ...product, cantidadSeleccionada: product.cantidadSeleccionada + 1 }
-            //       : product
-          //     ),
+    
           }
+        }
+        
           
-        : {
+        else {
+          object= {
             ...state,
             cart: [...state.cart, { ...newProduct, cantidadCarrito: 1 }],
-           // db: [...state.db, { ...newProduct, cantidaSeleccionada: 1 }],
+            
           };
+        }
+       localStorage.setItem("carrito", JSON.stringify(object.cart));
+       return object;
+        
     }
     case TYPES.ELIMINAR_UNO: {
-      return {
+      let object={
         ...state,
         cart:
           state.cart.filter((product) => product.id === action.payload)[0]
@@ -60,15 +65,24 @@ export function productReducer(state, action) {
                   ? { ...product, cantidadCarrito: product.cantidadCarrito - 1 }
                   : product
               ),
-      };
+      }
+      localStorage.setItem("carrito", JSON.stringify(object.cart));
+      localStorage.getItem("carrito");
+      return object;
+       
+      
     }
     case TYPES.ELIMINAR_TODOS: {
-      return {
-        ...state,
-        cart: state.cart.filter((product) => product.id !== action.payload),
-      };
+      let object={
+          ...state,
+          cart: state.cart.filter((product) => product.id !== action.payload),
+     }
+     localStorage.setItem("carrito", JSON.stringify(object.cart));
+     localStorage.getItem("carrito");
+      return object;
     }
     case TYPES.LIMPIAR_CARRITO: {
+      (localStorage.removeItem("carrito"))
       return {
         ...state,
         cart: [],
