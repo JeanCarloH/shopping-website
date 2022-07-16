@@ -33,8 +33,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Close from "@mui/icons-material/Close";
 
 
-function Shopping() {
-  const [state, dispatch] = useReducer(productReducer, productInitialState);
+function Shopping({state, dispatch}) {
+
   const [error, setError] = useState(null);
   const [busqueda, setBusqueda] = useState(null);
   const { db, cart } = state;

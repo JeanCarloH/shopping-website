@@ -7,13 +7,24 @@ import Categoria from "./components/Categoria";
 import ProductTable from "./components/ProductTable";
 import ProductForm from "./components/ProductForm";
 import Login from "./components/Login";
+import { productReducer, productInitialState } from "./reducers/productReducer";
+import { useReducer } from "react";
+import {
+  useFirebaseApp
+} from 'reactfire';
+
+import { AuthProvider } from "./components/context/authContext";
+import { LoginRounded } from "@mui/icons-material";
 
 function App() {
+  
   const arregloImages=["logo/Bienvenidos.png","logo/ropa"]
+  const [state, dispatch] = useReducer(productReducer, productInitialState);
   return (
+    <AuthProvider>
     <HashRouter>
       <Routes>
-        <Route exact path="/" element={<Shopping />} image={arregloImages} imagetext="bienvenidos" >
+        <Route exact path="/" element={<Shopping state={state} dispatch={dispatch}  />} image={arregloImages} imagetext="bienvenidos" >
           <Route
             exact
             path="/carrito-de-compras"
@@ -45,9 +56,9 @@ function App() {
             element={<Categoria categoria={5} nombre="Mascotas" image="logo/mascotas.png" imagetext="mascotas" />}
           />
         </Route>
-        <Route exact path="/login" element={<Login/> } >
+        <Route exact path="/login" element={<Login /> } >
         </Route>
-        <Route exact path="/admin" element={<Admin />}>
+        <Route exact path="/admin" element={<Admin state={state} dispatch={dispatch} />}>
           <Route exact path="/admin" element={<ProductTable />} />
           <Route exact path="/admin/registrar" element={<ProductForm />} />
           <Route
@@ -59,6 +70,7 @@ function App() {
         <Route exact path="*" element={<Error404 />} />
       </Routes>
     </HashRouter>
+    </AuthProvider>
   );
 }
 

@@ -15,46 +15,62 @@ import {
 import { useState, useEffect} from 'react';
 import {  useLocation } from "react-router-dom"
 import { Link } from "react-router-dom";
-import useUser from './hooks/useUser';
+import { useAuth } from './context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () =>{
 
 
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const{login, isLogged,  isLoginLoading, hasLoginError}=useUser()
-    const location = useLocation();
-    console.log(location)
+    const [user,setUser]=useState({
+        email:"",
+        password:"",
+    });
 
-    useEffect(() =>{
-        if(isLogged){
-                location.pathname="/"
-        } //tal cosa uselocation
-    }, [isLogged] );
-    const handleSubmit =(e) =>{
-        e.preventDefault()
-      //  alert(userName,password)
-      login({userName, password})
+    const {login,loginWithGoogle}=useAuth();    
+    const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+    setError("");
+    try {
+      await login(user.email, user.password);
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
     }
+  };
+
+  const handleChange = ({ target: { value, name } }) =>
+    setUser({ ...user, [name]: value });
+   
+
+  const handleGoogleSignin = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  
+
+   
+   
 
  
-    console.log(userName)
-    console.log(password)
     return(
         <>
          <Grid item xs={12} md={12} sx={{textAlign:'center'}}>
          <h2>Inicie Sesión
          </h2>
 
-            {isLoginLoading &&  //si esta cargando
-            <strong>Comprobando credenciales..</strong>
-            }
+           
          
          </Grid>
      
-         {!isLoginLoading &&    //si no esta cargando
+            
            <Box
            component="form"
            sx={{
@@ -65,17 +81,17 @@ const Login = () =>{
            >
               
                <Grid >
-               <TextField id="outlined-basic" label="Nombre" variant="outlined" value={userName}  onChange={e => setUserName(e.target.value)}/>
+               <TextField id="outlined-basic" label="Nombre" variant="outlined" name='email'  onChange={ handleChange}/>
                 </Grid>
 
                 <Grid >
-               <TextField id="outlined-basic" type="password" label="Contraseña" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} />
+               <TextField id="outlined-basic" type="password" label="Contraseña" name='password' variant="outlined"  onChange={ handleChange} />
                 </Grid>
 
                
                 <Grid >
                 <Link to="/">
-                <Button variant="contained" color="success" >
+                <Button variant="contained" color="success" onClick={ handleSubmit} >
                    Success
                </Button>
                </Link>
@@ -85,11 +101,8 @@ const Login = () =>{
                 
 
            </Box>
-        }
-            {hasLoginError &&
-            <strong>Sus credenciales son invalidas!</strong>
-
-            }
+        
+           
            
                 </>
 

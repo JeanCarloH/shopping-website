@@ -20,7 +20,17 @@ import MainFeaturedPost from "./MainFeaturedPost";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-import useUser from "./hooks/useUser";
+import { useAuth } from "./context/authContext";
+
+
+import {
+  FormControl,
+  Grid,
+  InputLabel,
+  Select,
+  styled,
+} from "@mui/material";
+
 
 const pages = [
   {
@@ -58,19 +68,16 @@ const post={
   imagetext:"bienvenida",
 
 }
-//const isLogged=true
+
 
 
 
 
 const ResponsiveAppBar = ({ numProducts }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const {isLogged,logout}= useUser()
+  const{user,logout}=useAuth() //aca traemos el estado de usecontext
+  
 
-  const handleClick = e =>{
-    e.preventDefault()
-    logout()
-  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -199,34 +206,45 @@ const ResponsiveAppBar = ({ numProducts }) => {
             </Tooltip>
           </Box>
           <Box sx={{ flexGrow: 0, m: 1 }}>
-            
-            <Tooltip title="Administrador">
-            <Link to="/admin">
-              <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
-                <SupervisorAccountIcon />
-              </IconButton>
-            </Link>
-          </Tooltip>
-            
-            
-            {isLogged ?
-              <Tooltip title="Cerrar Sesión">
-              <Link to="/">
-                <IconButton sx={{ p: 0, color: grey[50], m: 1 }} onClick={handleClick}>
-                <LogoutIcon />
-                  
-                </IconButton>
-              </Link>
-              </Tooltip>
-              :
-              <Tooltip title="Iniciar Sesión">
-              <Link to="/login">
+            {user&&
+              <Tooltip title="Administrador">
+              <Link to="/admin">
                 <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
-                <LoginIcon />
+                  <SupervisorAccountIcon />
                 </IconButton>
               </Link>
             </Tooltip>
             }
+          
+            
+            
+            {user?
+              <Tooltip title="Cerrar Sesión">
+                <Link to="/">
+                  <IconButton sx={{ p: 0, color: grey[50], m: 1 }} onClick={logout}>
+                  <LogoutIcon />
+                    
+                  </IconButton>
+                </Link>
+                </Tooltip>
+                
+                :
+                <Tooltip title="Iniciar Sesión">
+                <Link to="/login">
+                  <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
+                  <LoginIcon />
+                  </IconButton>
+                </Link>
+              </Tooltip>
+            
+            }
+                
+ 
+
+
+             
+             
+            
           
           </Box>
         </Toolbar>

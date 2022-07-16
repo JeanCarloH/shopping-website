@@ -28,7 +28,7 @@ export function productReducer(state, action) {
         (product) => product.id === newProduct.id
       );
       
-      let object=null;
+      let object={}
         if(productInCart){
           object= {
             ...state,
