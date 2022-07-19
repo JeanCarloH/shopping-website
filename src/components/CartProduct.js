@@ -18,7 +18,8 @@ export default function CartProduct({
       <CardMedia
         component="img"
         alt="green iguana"
-        height="140"
+        height=""
+        width=""
         src={product.imagenData}
       />
       <CardContent>

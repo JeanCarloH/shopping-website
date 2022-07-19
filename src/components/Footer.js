@@ -28,6 +28,7 @@ function Footer(props) {
   const { description, title, social } = props;
 
   return (
+  
     <Box component="footer" sx={{ bgcolor: "background.paper", py: 6 }}>
       <Container maxWidth="lg">
         <Grid container>

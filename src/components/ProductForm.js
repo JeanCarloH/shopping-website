@@ -11,7 +11,7 @@ import {
   Select,
   styled,
 } from "@mui/material";
-import { Margin, PhotoCamera } from "@mui/icons-material";
+import { ContactPageOutlined, ContactSupport, Margin, PhotoCamera } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -21,6 +21,9 @@ import { createTheme,ThemeProvider } from '@mui/material/styles';
 import BasicAlerts from "./BasicAlerts";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import { db2 } from "./firebase";
+import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc} from "firebase/firestore";
+
 
 const initialForm = {
   id: null,
@@ -35,13 +38,36 @@ const initialForm = {
 };
 
 export default function ProductForm({ edit }) {
-  const { db, createData, updateData, setDataToEdit } = useOutletContext();
+  const { db, createData, updateData} = useOutletContext();
 
   const [form, setForm] = useState(initialForm);
   const { id } = useParams();
 
   const [selectedFile, setSelectedFile] = useState(null);
  
+  const add = async(object) =>{
+ 
+   // data.id = Date.now();
+      const hola= collection(db2,"product")
+      await addDoc(hola, object
+      );
+        console.log("nueva tarea guardada")
+      } 
+
+    const editar = async(object) =>{
+      const holas = doc(db2, "product", "object.id");
+      await updateDoc(holas, {
+          object
+      });
+
+    }
+
+        const eliminar = async(object) =>{
+          await deleteDoc(doc(db2, "product", object.id));
+
+    }
+
+
 
  
   const productos = db.find((item) => item.id == id);
@@ -94,6 +120,7 @@ export default function ProductForm({ edit }) {
   };
 
   const handleSubmit = (e) => {
+    
     //e.preventDefault();
     if (
       !form.nombre ||
@@ -108,12 +135,14 @@ export default function ProductForm({ edit }) {
      
       if (edit) {
         updateData(form);
+        editar(form)
        
         
        // alert("Datos actualizados exitosamente");
       } else {
         createData(form);
-        
+        add(form)
+      
         //alert("Datos creados exitosamente");
       }
       handleReset();
@@ -121,7 +150,7 @@ export default function ProductForm({ edit }) {
   };
     const handleReset = (e) => {
       setForm(initialForm);
-      setDataToEdit(null);
+     
     };
     /*if(dataToEdit === null){
         createData(form);

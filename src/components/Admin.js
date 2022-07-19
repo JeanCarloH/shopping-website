@@ -10,6 +10,10 @@ import Loader from "./Loader";
 import { Outlet } from "react-router-dom";
 import ProductForm from "./ProductForm";
 import BasicAlerts from "./BasicAlerts";
+import { getDocs} from "firebase/firestore";
+import { db2 } from "./firebase";
+import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc} from "firebase/firestore";
+
 
 function Admin() {
   const [state, dispatch] = useReducer(productReducer, productInitialState);
@@ -79,7 +83,8 @@ function Admin() {
     });
   };
 
-  const deleteData = (id) => {
+  const deleteData = async(id) => {
+    await deleteDoc(doc(db, "cities", '${id}'));
     let isDelete = window.confirm(
       `¿Estás seguro de eliminar el registro con el id '${id}'?`
     );
