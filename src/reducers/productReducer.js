@@ -9,7 +9,7 @@ export function productReducer(state, action) {
     case TYPES.CONSULTAR_PRODUCTO: {
       return {
         ...state,
-        db: action.payload.map((producto) => producto),
+        db: action.payload.map((producto) =>  ({ id: producto.id, ...producto.data() })),
       };
     }
     case TYPES.CREAR_PRODUCTO: {

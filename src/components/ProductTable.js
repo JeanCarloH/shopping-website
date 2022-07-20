@@ -14,7 +14,8 @@ import { IconButton, Tooltip,Button } from "@mui/material";
 import EnableColorOnDarkAppBar from "./EnableColorOnDarkAppBar";
 import BasicAlerts from "./BasicAlerts";
 import { createTheme,ThemeProvider } from '@mui/material/styles';
-
+import { db2 } from "./firebase";
+import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc,getDocs} from "firebase/firestore";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,6 +49,7 @@ const temaNuevo = createTheme({
 }
 )
 
+
 export default function ProductTable() {
   const { db,deleteData,verify,verificador } = useOutletContext();
 
@@ -74,8 +76,8 @@ export default function ProductTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {db.length > 0 &&
-              db.map((product) => (
+            { db.length > 0 &&
+            db.map((product) => (
                 <StyledTableRow key={product.id}>
                   <StyledTableCell align="right">
                     {product.nombre}

@@ -27,20 +27,23 @@ function Admin() {
 
   useEffect(() => {
     setLoading(true);
-    helpHttp()
-      .get(url)
-      .then((res) => {
-        if (!res.err) {
-          dispatch({ type: TYPES.CONSULTAR_PRODUCTO, payload: res });
-          setError(null);
-        } else {
-          dispatch({ type: TYPES.SIN_DATOS });
-          setError(res);
-        }
-
+    if (getProducts().docs) {
+      dispatch({ type: TYPES.CONSULTAR_PRODUCTO, payload:getProducts().docs  });
+      //setError(null);
+    } else {
+      dispatch({ type: TYPES.SIN_DATOS });
+      //setError();
+    }
+    
         setLoading(false);
-      });
-  }, [url]);
+     
+  }, []);
+
+  const getProducts = async () => {
+    const querySnapshot = await getDocs(collection(db2, "product"));
+    return querySnapshot;
+   
+  }
 
   const createData = (data) => {
     data.id = Date.now();
