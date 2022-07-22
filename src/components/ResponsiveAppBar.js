@@ -53,6 +53,10 @@ const pages = [
     nombre: "Mascotas",
     url: "/mascotas",
   },
+  {
+    nombre: "Arriendos",
+    url: "/arriendos",
+  },
 ];
 
 const mainFeaturedPost = {
@@ -119,7 +123,7 @@ const ResponsiveAppBar = ({ numProducts }) => {
               textDecoration: "none",
             }}
           >
-            WebShopxd
+            WebShop
           </Typography>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

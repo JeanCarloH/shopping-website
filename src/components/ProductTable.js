@@ -51,7 +51,7 @@ const temaNuevo = createTheme({
 
 
 export default function ProductTable() {
-  const { db,deleteData,verify,verificador } = useOutletContext();
+  const { db,deleteData,verify,verificador,product } = useOutletContext();
 
   return (
     <>

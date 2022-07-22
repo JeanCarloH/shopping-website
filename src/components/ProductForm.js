@@ -26,8 +26,8 @@ import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,delet
 
 
 const initialForm = {
-  id: null,
   nombre: "",
+  celular:"",
   descripcion: "",
   cantidad: "",
   precio: "",
@@ -47,29 +47,14 @@ export default function ProductForm({ edit }) {
  
   const add = async(object) =>{
  
-   // data.id = Date.now();
       const hola= collection(db2,"product")
       await addDoc(hola, object
       );
-        console.log("nueva tarea guardada")
+        console.log("nueva tarea guardada" )
       } 
 
-    const editar = async(object) =>{
-      const holas = doc(db2, "product", "object.id");
-      await updateDoc(holas, {
-          object
-      });
+   
 
-    }
-
-        const eliminar = async(object) =>{
-          await deleteDoc(doc(db2, "product", object.id));
-
-    }
-
-
-
- 
   const productos = db.find((item) => item.id == id);
   useEffect(() => {
     if (edit) {
@@ -134,13 +119,12 @@ export default function ProductForm({ edit }) {
     } else {
      
       if (edit) {
-        updateData(form);
-        editar(form)
-       
+        updateData(id,form);
+        
         
        // alert("Datos actualizados exitosamente");
       } else {
-        createData(form);
+        //createData(form);
         add(form)
       
         //alert("Datos creados exitosamente");
@@ -193,6 +177,15 @@ export default function ProductForm({ edit }) {
         </Grid>
         <Grid item xs={12} md={3}>
           <TextField
+            name="celular"
+            onChange={handleChange}
+            required
+            label="Celular"
+            value={form.celular}
+          />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <TextField
             name="descripcion"
             onChange={handleChange}
             required
@@ -237,6 +230,7 @@ export default function ProductForm({ edit }) {
               <MenuItem value="3">Vehiculos</MenuItem>
               <MenuItem value="4">Alimentos</MenuItem>
               <MenuItem value="5">Mascotas</MenuItem>
+              <MenuItem value="6">Arriendos</MenuItem>
             </Select>
           </FormControl>
         </Grid>

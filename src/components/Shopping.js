@@ -31,7 +31,8 @@ import Stack from '@mui/material/Stack';
 //
 import CloseIcon from '@mui/icons-material/Close';
 import Close from "@mui/icons-material/Close";
-
+import { db2 } from "./firebase";
+import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc,getDocs} from "firebase/firestore";
 
 function Shopping({state, dispatch}) {
 
@@ -151,35 +152,46 @@ function Shopping({state, dispatch}) {
 
 
   useEffect(() => {
-    helpHttp()
-      .get(url)
-      .then((res) => {
-        if (!res.err) {
-          dispatch({ type: TYPES.CONSULTAR_PRODUCTO, payload: res });
-          setError(null);
-        } else {
-          dispatch({ type: TYPES.SIN_DATOS });
-          setError(res);
-        }
-      });
-  }, [url]);
+  
+   getProducts();
+   getProducts2();
+  }, []);
+
+  const getProducts2 = async () => {
+    const querySnapshot = await getDocs(collection(db2, "product"));
+    querySnapshot.docs.map((doc) => {
+      console.log(`${doc.id} => ${doc.data().nombre}`);
+});
+}
+
+  const getProducts = async () => {
+    const querySnapshot = await getDocs(collection(db2, "product"));
+
+    if (querySnapshot.docs) {
+      dispatch({ type: TYPES.CONSULTAR_PRODUCTO, payload:querySnapshot.docs });
+      //setError(null);
+    } else {
+      dispatch({ type: TYPES.SIN_DATOS });
+      //setError();
+    }
+
+  }
 
   const addProduct = (id) =>{
     dispatch({ type: TYPES.AGREGAR_PRODUCTO, payload: id });
    
-    
    }
     
   
   const deleteOne = (id) => {
     dispatch({ type: TYPES.ELIMINAR_UNO, payload: id });
-    //localStorage.removeItem("carrito", JSON.stringify(state.cart));
+  
   }
 
 
   const deleteAll = (id) =>{
     dispatch({ type: TYPES.ELIMINAR_TODOS, payload: id });
-    //localStorage.removeItem("carrito", JSON.stringify(state.cart));
+   
   }
    
 
@@ -220,7 +232,9 @@ function Shopping({state, dispatch}) {
             edge="start"
             color="inherit"
           //  aria-label="open drawer"
-            sx={{ marginRight: 2 }}
+            sx={{ 
+             textAlign:'center'
+            }}
             onClick={handleChange3}
 
           >

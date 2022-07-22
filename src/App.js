@@ -18,13 +18,13 @@ import { LoginRounded } from "@mui/icons-material";
 
 function App() {
   
-  const arregloImages=["logo/Bienvenidos.png","logo/ropa"]
+
   const [state, dispatch] = useReducer(productReducer, productInitialState);
   return (
     <AuthProvider>
     <HashRouter>
       <Routes>
-        <Route exact path="/" element={<Shopping state={state} dispatch={dispatch}  />} image={arregloImages} imagetext="bienvenidos" >
+        <Route exact path="/" element={<Shopping state={state} dispatch={dispatch}  />}>
           <Route
             exact
             path="/carrito-de-compras"
@@ -33,27 +33,32 @@ function App() {
           <Route
             exact
             path="/electrodomesticos"
-            element={<Categoria categoria={1} nombre="Electrodomesticos"image="logo/electrodomesticos.png" imagetext="electrodomestico" />}
+            element={<Categoria categoria={1} nombre="Electrodomesticos" />}
           />
           <Route
             exact
             path="/ropa"
-            element={<Categoria categoria={2} nombre="Ropa" image="logo/ropa.png" imagetext="ropa" />}
+            element={<Categoria categoria={2} nombre="Ropa" />}
           />
           <Route
             exact
             path="/vehiculos"
-            element={<Categoria categoria={3} nombre="Vehiculos" image="logo/vehiculos.png" imagetext="vehiculo"  />}
+            element={<Categoria categoria={3} nombre="Vehiculos"  />}
           />
           <Route
             exact
             path="/alimentos"
-            element={<Categoria categoria={4} nombre="Alimentos" image="logo/alimentos.png" imagetext="alimento" />}
+            element={<Categoria categoria={4} nombre="Alimentos"  />}
           />
           <Route
             exact
             path="/mascotas"
-            element={<Categoria categoria={5} nombre="Mascotas" image="logo/mascotas.png" imagetext="mascotas" />}
+            element={<Categoria categoria={5} nombre="Mascotas"  />}
+          />
+          <Route
+            exact
+            path="/arriendos"
+            element={<Categoria categoria={6} nombre="Arriendos"  />}
           />
         </Route>
         <Route exact path="/login" element={<Login /> } >
