@@ -5,8 +5,9 @@ import Typography from "@mui/material/Typography";
 import { CardContent, IconButton, Tooltip } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import HoverRating from "./HoverRating";
+import CardActionArea from "@mui/material/CardActionArea";
 
-export default function StoreProduct({ cart, addProduct, product }) {
+export default function StoreProduct({ cart, addProduct, product,handleOpen }) {
   //la tarjeta
   const cartProduct = cart.find((item) => item.id == product.id);
   return (
@@ -18,6 +19,7 @@ export default function StoreProduct({ cart, addProduct, product }) {
         alt={product.imagen}
         height="280"
         src={product.imagenData}
+        onClick={() => handleOpen(product.imagenData)}
       />
      
       <CardContent>
@@ -65,6 +67,7 @@ export default function StoreProduct({ cart, addProduct, product }) {
         </Typography>
       </CardContent>
     </Card>
+   
     </>
   );
 }

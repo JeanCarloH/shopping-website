@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import { grey } from "@mui/material/colors";
 import { width } from "@mui/system";
 
-function Categoria({ nombre, categoria, image, imagetext }) {
+function Categoria({ nombre, categoria, image, imagetext ,handleOpen}) {
   const { cart, db, addProduct } = useOutletContext();
   const products = db.filter((product) => product.categoria == categoria);
   const [numero, setNumero] = useState(0);
@@ -90,6 +90,7 @@ function Categoria({ nombre, categoria, image, imagetext }) {
                 addProduct={addProduct}
                 product={product}
                 cart={cart}
+                handleOpen={handleOpen}
               />
             </Grid>
           ))}

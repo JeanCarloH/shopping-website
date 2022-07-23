@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useOutletContext, useNavigate} from "react-router-dom";
 import CartProduct from "./CartProduct";
 import StoreProduct from "./StoreProduct";
-function CarritoDeCompra() {
+function CarritoDeCompra({handleOpen}) {
   const {  addProduct, deleteOne, deleteAll, clearCart,db} =
     useOutletContext();
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ function CarritoDeCompra() {
       cantidad:+${product.cantidadCarrito}
                                           `
       totalPagar=product.cantidadCarrito* product.precio
-      window.open(`https://api.whatsapp.com/send?text=${productosTotales} a pagar:${totalPagar}&phone=57${product.celular}`,'_blank') 
+      window.open(`https://api.whatsapp.com/send?text=${productosTotales} total a pagar:${totalPagar}&phone=57${product.celular}`,'_blank') 
       
   })}};
 
@@ -53,6 +53,7 @@ function CarritoDeCompra() {
                 deleteAll={deleteAll}
                 product={product}
                 addProduct={addProduct}
+                handleOpen={handleOpen}
               />
 
             </Grid>

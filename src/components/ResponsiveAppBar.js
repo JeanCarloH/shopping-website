@@ -57,6 +57,10 @@ const pages = [
     nombre: "Arriendos",
     url: "/arriendos",
   },
+  {
+    nombre: "Otros",
+    url: "/otros",
+  },
 ];
 
 const mainFeaturedPost = {
@@ -111,34 +115,32 @@ const ResponsiveAppBar = ({ numProducts }) => {
           <Typography
             variant="h6"
             noWrap
-            //component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "primary",
+              color: "white",
               textDecoration: "none",
             }}
           >
             WebShop
           </Typography>
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none"}}}>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="inherit" //nada
             >
               <MenuIcon />
             </IconButton>
 
-            <Menu
+            <Menu 
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -153,12 +155,13 @@ const ResponsiveAppBar = ({ numProducts }) => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block", md: "none"},
+                 
               }}
             >
               {pages.map((page) => (
                 <Link to={page.url} key={page.nombre}>
-                  <MenuItem>
+                  <MenuItem sx={{color:"white"}}>
                     <Typography textAlign="center">{page.nombre}</Typography>
                   </MenuItem>
                 </Link>
@@ -179,13 +182,13 @@ const ResponsiveAppBar = ({ numProducts }) => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "white",
               textDecoration: "none",
             }}
           >
             WebShop
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }}}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex"  } }}>
             {pages.map((page) => (
               <Link key={page.nombre} to={page.url} >
                 <Button

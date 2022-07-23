@@ -32,12 +32,12 @@ function Footer(props) {
     <Box component="footer" sx={{ bgcolor: "background.paper", py: 6 }}>
       <Container maxWidth="lg">
         <Grid container>
-          {social.map((network) => (
+          {social.map((network,index) => (
             <Grid
               item
               xs={6}
-              md={2}
-              key={network.name}
+              md={3}
+              key={index}
               sx={{ textAlign: "center" }}
             >
               <Link

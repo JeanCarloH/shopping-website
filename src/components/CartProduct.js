@@ -12,15 +12,16 @@ export default function CartProduct({
   deleteOne,
   deleteAll,
   product,
+  handleOpen
 }) {
   return (
     <Card sx={{ m: 2 }}>
       <CardMedia
         component="img"
         alt="green iguana"
-        height=""
-        width=""
+        height="280"
         src={product.imagenData}
+        onClick={() => handleOpen(product.imagenData)}
       />
       <CardContent>
         <Typography gutterBottom variant="body1" component="div">

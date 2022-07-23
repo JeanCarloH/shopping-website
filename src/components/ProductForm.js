@@ -11,18 +11,16 @@ import {
   Select,
   styled,
 } from "@mui/material";
-import { ContactPageOutlined, ContactSupport, Margin, PhotoCamera } from "@mui/icons-material";
+import { PhotoCamera } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2";
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 //alerta
-import BasicAlerts from "./BasicAlerts";
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
+
 import { db2 } from "./firebase";
-import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc} from "firebase/firestore";
+import {collection,addDoc} from "firebase/firestore";
 
 
 const initialForm = {
@@ -63,10 +61,7 @@ export default function ProductForm({ edit }) {
     }
   }, []);
 
-  /*if (edit) {
-    const product = db.find((item) => item.id == id);
-    setForm(product);
-  }*/
+
 
   function file(e) {
     var file = e.target.files[0];
@@ -121,13 +116,10 @@ export default function ProductForm({ edit }) {
       if (edit) {
         updateData(id,form);
         
-        
-       // alert("Datos actualizados exitosamente");
       } else {
-        //createData(form);
+   
         add(form)
       
-        //alert("Datos creados exitosamente");
       }
       handleReset();
     }
@@ -136,13 +128,7 @@ export default function ProductForm({ edit }) {
       setForm(initialForm);
      
     };
-    /*if(dataToEdit === null){
-        createData(form);
-    }else{
-        updateData(form);
-    }*/
-
-    //handleReset();
+  
   
 
   const Input = styled("input")({
@@ -231,6 +217,7 @@ export default function ProductForm({ edit }) {
               <MenuItem value="4">Alimentos</MenuItem>
               <MenuItem value="5">Mascotas</MenuItem>
               <MenuItem value="6">Arriendos</MenuItem>
+              <MenuItem value="7">Otros</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -245,7 +232,7 @@ export default function ProductForm({ edit }) {
               accept="image/*"
               id="icon-button-file"
               type="file"
-              //value=
+             
               
             />
             <IconButton
@@ -259,10 +246,10 @@ export default function ProductForm({ edit }) {
       </Grid>
       <Grid item md={12} sx  ={{display:"block", margin:"auto"}} > 
       <img src={`${form.imagenData}`} 
-                  alt={form.nombre}
+                  alt={form.imagen}
                   height="400"
                   width="auto"
-                  margi
+                  
                   />
                   </Grid>
           <ThemeProvider theme={temaNuevo}>

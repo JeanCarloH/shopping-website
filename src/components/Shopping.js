@@ -34,10 +34,10 @@ import Close from "@mui/icons-material/Close";
 import { db2 } from "./firebase";
 import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc,getDocs} from "firebase/firestore";
 
-function Shopping({state, dispatch}) {
+function Shopping({state, dispatch,handleOpen}) {
 
   const [error, setError] = useState(null);
-  const [busqueda, setBusqueda] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
   const { db, cart } = state;
   const [page, setPage] = React.useState(1);
   const [pageStart, setPageStart] = React.useState(0);
@@ -50,16 +50,6 @@ function Shopping({state, dispatch}) {
   
   const social = [
  
-    {
-      name: "WhatsApp",
-      icon: WhatsAppIcon,
-      url: "https://api.whatsapp.com/send?phone=573153838758",
-    },
-    {
-      name: "WhatsApp",
-      icon: WhatsAppIcon,
-      url: "https://api.whatsapp.com/send?phone=573004596117",
-    },
     {
       name: "LinkedIn",
       icon: LinkedInIcon,
@@ -154,15 +144,10 @@ function Shopping({state, dispatch}) {
   useEffect(() => {
   
    getProducts();
-   getProducts2();
+   
   }, []);
 
-  const getProducts2 = async () => {
-    const querySnapshot = await getDocs(collection(db2, "product"));
-    querySnapshot.docs.map((doc) => {
-      console.log(`${doc.id} => ${doc.data().nombre}`);
-});
-}
+ 
 
   const getProducts = async () => {
     const querySnapshot = await getDocs(collection(db2, "product"));
@@ -261,6 +246,7 @@ function Shopping({state, dispatch}) {
               addProduct={addProduct}
               product={product}
               cart={cart}
+              
               />
           </Grid>
           ))
@@ -273,6 +259,7 @@ function Shopping({state, dispatch}) {
                 addProduct={addProduct}
                 product={product}
                 cart={cart}
+                handleOpen={handleOpen}
               />
             </Grid>
           ))
@@ -281,7 +268,7 @@ function Shopping({state, dispatch}) {
        
       ) : (
         <Outlet
-          context={{ db, cart, addProduct, deleteOne, deleteAll, clearCart }}
+          context={{ db, cart, addProduct, deleteOne, deleteAll, clearCart}}
         />
       )}
   {location.pathname == "/" && (
