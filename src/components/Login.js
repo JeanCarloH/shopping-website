@@ -1,5 +1,6 @@
 
 import * as React from 'react';
+import { createContext, useContext} from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {
@@ -17,11 +18,18 @@ import {  useLocation } from "react-router-dom"
 import { Link } from "react-router-dom";
 import { useAuth } from './context/authContext';
 import { useNavigate } from 'react-router-dom';
+import Shopping from './Shopping';
+import ResponsiveAppBar from './ResponsiveAppBar';
 
-const Login = () =>{
 
 
+
+
+const Login = ({children}) =>{
+
+ 
     const [user,setUser]=useState({
+      
         email:"",
         password:"",
     });
@@ -63,12 +71,9 @@ const Login = () =>{
     return(
         <>
          <Grid item xs={12} md={12} sx={{textAlign:'center'}}>
-         <h2>Inicie Sesión
-         </h2>
+         <h2>Inicie Sesión</h2>
 
-           
-         
-         </Grid>
+          </Grid>
      
             
            <Box
@@ -79,7 +84,10 @@ const Login = () =>{
            noValidate
            autoComplete="off"
            >
-              
+                {/* <Grid >
+               <TextField id="outlined-basic" label="Nombre" variant="outlined" name='name'  onChange={ handleChange}/>
+                </Grid> */}
+
                <Grid >
                <TextField id="outlined-basic" label="Nombre" variant="outlined" name='email'  onChange={ handleChange}/>
                 </Grid>
@@ -97,13 +105,15 @@ const Login = () =>{
                </Link>
                 </Grid>
                 
-             
-                
+            
 
-           </Box>
-        
-           
-           
+           </Box> 
+         
+             {/* <Context
+             email={user.email}
+             /> */}
+          
+               
                 </>
 
     );

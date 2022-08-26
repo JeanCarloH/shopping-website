@@ -21,7 +21,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAuth } from "./context/authContext";
-
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 import {
   FormControl,
@@ -201,7 +201,29 @@ const ResponsiveAppBar = ({ numProducts }) => {
             ))}
           </Box>
 
+          
+          {user&&
+          user.email=="invitadodejean@gmail.com"&&
+           <h4> Hola, molina</h4>}
+          {user&&
+          user.email=="jeancarlocj14@gmail.com"&&
+           <h4> Hola Jean Carlo</h4>}
+
+          <Box sx={{ flexGrow: 0 , marginRight:1}}>
+          {user&&
+              <Tooltip title="Agregar publicidad">
+              <Link to="/publicidad">
+                <IconButton sx={{ p: 0, color: grey[50], m: 1 }}>
+                  <PostAddIcon />
+                </IconButton>
+              </Link>
+            </Tooltip>
+            }
+
+          </Box>  
+
           <Box sx={{ flexGrow: 0 }}>
+
             <Tooltip title="Carrito de compras">
               <Link to="/carrito-de-compras">
                 <Badge badgeContent={numProducts} color="secondary">
@@ -245,14 +267,7 @@ const ResponsiveAppBar = ({ numProducts }) => {
               </Tooltip>
             
             }
-                
- 
-
-
-             
-             
-            
-          
+           
           </Box>
         </Toolbar>
       </Container>

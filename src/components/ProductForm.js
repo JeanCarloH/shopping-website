@@ -16,42 +16,47 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import EnableColorOnDarkAppBar2 from "./EnableColorOnDarkAppBar2";
-import { createTheme,ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 //alerta
 
 import { db2 } from "./firebase";
-import {collection,addDoc} from "firebase/firestore";
-
+import { collection, addDoc } from "firebase/firestore";
+import { useAuth } from './context/authContext';
 
 const initialForm = {
   nombre: "",
-  celular:"",
+  celular: "",
   descripcion: "",
   cantidad: "",
   precio: "",
   categoria: "",
-  imagen: "",
-  imagenData: "",
- 
+  imagenes: {
+    img1: { img: "", imgData: null },
+    img2: { img: "", imgData: null },
+    img3: { img: "", imgData: null },
+  },
 };
 
 export default function ProductForm({ edit }) {
-  const { db, createData, updateData} = useOutletContext();
+  const { db, createData, updateData } = useOutletContext();
 
   const [form, setForm] = useState(initialForm);
   const { id } = useParams();
 
   const [selectedFile, setSelectedFile] = useState(null);
- 
-  const add = async(object) =>{
- 
-      const hola= collection(db2,"product")
-      await addDoc(hola, object
-      );
-        console.log("nueva tarea guardada" )
-      } 
 
-   
+  const{user,logout}=useAuth() //aca traemos el estado de usecontext
+
+  const add = async (object) => {
+    const hola = collection(db2, "product");
+    await addDoc(hola, object);
+    console.log("nueva tarea guardada");
+  };
+  const add2 = async (object) => {
+    const hola = collection(db2, "product2");
+    await addDoc(hola, object);
+    console.log("nueva tarea guardada");
+  };
 
   const productos = db.find((item) => item.id == id);
   useEffect(() => {
@@ -61,34 +66,39 @@ export default function ProductForm({ edit }) {
     }
   }, []);
 
-
-
   function file(e) {
     var file = e.target.files[0];
     var reader = new FileReader();
-    reader.onload = function(event) {
+    
+    reader.onload = function (event) {
+      
       setForm({
         ...form,
-        imagen: e.target.files[0].name,
-        //callback(reader.result);
-        imagenData:reader.result
-        
+        // imagen: e.target.files[0].name,
+        //imagenData: reader.result,
+        imagenes: {
+          ...form.imagenes,
+          [e.target.name]: {
+            img: e.target.files[0].name,
+            imgData: reader.result,
+          },
+        },
       });
     };
-  
+
     reader.readAsDataURL(file);
   }
+  
   const temaNuevo = createTheme({
     palette: {
       primary: {
-        main: '#1b5e20',
+        main: "#1b5e20",
       },
       secondary: {
-        main: '#b71c1c',
+        main: "#b71c1c",
       },
     },
-  }
-  )
+  });
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -96,11 +106,10 @@ export default function ProductForm({ edit }) {
       ...form,
       [e.target.name]: e.target.value,
     });
-   // console.log(e.target)
+    // console.log(e.target)
   };
 
   const handleSubmit = (e) => {
-    
     //e.preventDefault();
     if (
       !form.nombre ||
@@ -112,43 +121,35 @@ export default function ProductForm({ edit }) {
       alert("Datos incompletos.");
       return;
     } else {
-     
       if (edit) {
-        updateData(id,form);
-        
-      } else {
-   
-        add(form)
-      
+        updateData(id, form);
+      } if(user.email=="jeancarlocj14@gmail.com") {
+        add(form);
+      } if(user.email=="invitadodejean@gmail.com"){
+        add2(form);
       }
       handleReset();
     }
   };
-    const handleReset = (e) => {
-      setForm(initialForm);
-     
-    };
-  
-  
+  const handleReset = (e) => {
+    setForm(initialForm);
+  };
 
   const Input = styled("input")({
     display: "none",
   });
 
-
-   
-
   return (
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch"},
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
       }}
       noValidate
       autoComplete="off"
     >
-        <EnableColorOnDarkAppBar2 />
-      <Grid container textAlign="center" sx={{ display:"inline-flex"}}>
+      <EnableColorOnDarkAppBar2 />
+      <Grid container textAlign="center" sx={{ display: "inline-flex" }}>
         <Grid item xs={12} md={12}>
           <h2>Registre su articulo acá</h2>
         </Grid>
@@ -221,21 +222,20 @@ export default function ProductForm({ edit }) {
             </Select>
           </FormControl>
         </Grid>
-     
+
         <Grid item xs={12} md={3}>
-       
-          <label>Subir imagen</label>
-          <label htmlFor="icon-button-file">
+          
+          <label htmlFor="icon-button-file1">
+            Subir imagen
             <Input
-              name="imagen"
+              name="img1"
               onChange={file}
               accept="image/*"
-              id="icon-button-file"
+              id="icon-button-file1"
               type="file"
-             
-              
             />
             <IconButton
+              name="img1"
               color="primary"
               aria-label="upload picture"
               component="span"
@@ -243,42 +243,101 @@ export default function ProductForm({ edit }) {
               <PhotoCamera />
             </IconButton>
           </label>
-      </Grid>
-      <Grid item md={12} sx  ={{display:"block", margin:"auto"}} > 
-      <img src={`${form.imagenData}`} 
-                  alt={form.imagen}
-                  height="400"
-                  width="auto"
-                  
-                  />
-                  </Grid>
-          <ThemeProvider theme={temaNuevo}>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          
+          <label htmlFor="icon-button-file2">
+            Subir imagen
+            <Input
+              name="img2"
+              onChange={file}
+              accept="image/*"
+              id="icon-button-file2"
+              type="file"
+            />
+            <IconButton
+              name="img2"
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+         
+          <label htmlFor="icon-button-file3">
+            Subir imagen
+            <Input
+          
+              name="img3"
+              onChange={file}
+              accept="image/*"
+              id="icon-button-file3"
+              type="file"
+            />
+            <IconButton
+              name="img3"
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </Grid>
+
+        <Grid item md={6} sx={{ display: "block", margin: "auto" }}>
+          <img
+            src={`${form.imagenes.img1.imgData}`}
+            alt={form.imagenes.img1.img}
+            height="400"
+            width="auto"
+          />
+        </Grid>
+
+        <Grid item md={6} sx={{ display: "block", margin: "auto" }}>
+          <img
+            src={`${form.imagenes.img2.imgData}`}
+            alt={form.imagenes.img2.img}
+            height="400"
+            width="auto"
+          />
+        </Grid>
+
+        <Grid item md={6} sx={{ display: "block", margin: "auto" }}>
+          <img
+            src={`${form.imagenes.img3.imgData}`}
+            alt={form.imagenes.img3.img}
+            height="400"
+            width="auto"
+          />
+        </Grid>
+
+        <ThemeProvider theme={temaNuevo}>
+          <Grid item xs={12} md={6}>
+            <Link to="/admin">
+              <Button variant="contained" color="secondary">
+                regresar
+              </Button>
+            </Link>
+          </Grid>
 
           <Grid item xs={12} md={6}>
-          <Link to="/admin">
-            <Button variant="contained"
-            color="secondary"
-             >
-              regresar
+            <Link to="/admin">
+              <Button
+                onClick={handleSubmit}
+                variant="contained"
+                endIcon={<SaveIcon />}
+                color="primary"
+              >
+                guardar
               </Button>
-          </Link>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-        <Link to="/admin">
-          <Button
-            onClick={handleSubmit}
-            variant="contained"
-            endIcon={<SaveIcon />}
-            color="primary"
-          >
-            guardar
-          </Button>
-          </Link>
-        
-        </Grid>
-
-       
+            </Link>
+          </Grid>
         </ThemeProvider>
       </Grid>
     </Box>

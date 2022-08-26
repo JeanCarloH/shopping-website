@@ -31,18 +31,27 @@ import Stack from '@mui/material/Stack';
 //
 import CloseIcon from '@mui/icons-material/Close';
 import Close from "@mui/icons-material/Close";
+import Paper from "@mui/material/Paper";
 import { db2 } from "./firebase";
 import { doc, onSnapshot, collection, query, where,addDoc,updateDoc,setDoc,deleteDoc,getDocs} from "firebase/firestore";
+import Publicidad from "./Publicidad";
+import { useAuth } from './context/authContext';
 
-function Shopping({state, dispatch,handleOpen}) {
+import Login from "./Login";
+
+
+function Shopping({state, dispatch,handleOpen,formPublicidad}) {
+
 
   const [error, setError] = useState(null);
+  const [foto, setFoto] = useState("");
   const [busqueda, setBusqueda] = useState("");
   const { db, cart } = state;
   const [page, setPage] = React.useState(1);
   const [pageStart, setPageStart] = React.useState(0);
   const [pageEnd, setPageEnd] = React.useState(9);
   const [valueCaptured, setvalueCaptured] = React.useState(1);
+  const{user,logout}=useAuth() //aca traemos el estado de usecontext
   let url = "http://localhost:5000/productos";
 
 
@@ -144,6 +153,7 @@ function Shopping({state, dispatch,handleOpen}) {
   useEffect(() => {
   
    getProducts();
+   getAdvertisement();
    
   }, []);
 
@@ -160,6 +170,14 @@ function Shopping({state, dispatch,handleOpen}) {
       //setError();
     }
 
+  }
+  
+  const getAdvertisement = async () => {
+    const querySnapshot = await getDocs(collection(db2, "Advertisement"));
+ 
+    querySnapshot.docs.map(producto=>
+      setFoto(producto.data().imagenes.img1.imgData)
+      )
   }
 
   const addProduct = (id) =>{
@@ -184,12 +202,16 @@ function Shopping({state, dispatch,handleOpen}) {
     dispatch({ type: TYPES.LIMPIAR_CARRITO });
     localStorage.removeItem("carrito", JSON.stringify(state.cart));
   }
-
+  //console.log(formPublicidad.ladoBanner)
 
   return (
     <>
-   
+    
       <ResponsiveAppBar numProducts={state.cart.length} />
+   
+      
+    
+      
 
       {error && (
         <Message
@@ -284,6 +306,10 @@ function Shopping({state, dispatch,handleOpen}) {
           social={social}
         />
       
+         
+    
+         
+
     </>
   );
 }

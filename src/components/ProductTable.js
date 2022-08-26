@@ -63,7 +63,7 @@ export default function ProductTable() {
       
       }
       <TableContainer sx={{ m: 3 }} component={Paper}>
-        <Table sx={{ width:"98%" }} aria-label="customized table">
+        <Table sx={{ width:"100%" }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="right">Nombre</StyledTableCell>
@@ -71,8 +71,9 @@ export default function ProductTable() {
               <StyledTableCell align="right">Cantidad</StyledTableCell>
               <StyledTableCell align="right">Precio</StyledTableCell>
               <StyledTableCell align="right">Categoria</StyledTableCell>
-              <StyledTableCell align="right">Imagen</StyledTableCell>
-              <StyledTableCell align="right">Acciones</StyledTableCell>
+              <StyledTableCell align="center" >Imagen</StyledTableCell>
+           
+              <StyledTableCell align="center" >Acciones</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -95,11 +96,21 @@ export default function ProductTable() {
                     {product.categoria}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                  <img src={`${product.imagenData}`} 
-                  alt={product.nombre}
-                  height="280"
-                  />
+                    {
+                 Object.keys(product.imagenes).map((key,index) => 
+                 
+                    <img src={`${product.imagenes[key].imgData}`} 
+                    alt={product.imagenes[key].img}
+                    height="100"
+                    />
+                   
+                  )
+                    
+                }
                   </StyledTableCell>
+                 
+                 
+                 
                   <StyledTableCell align="right">
                   <ThemeProvider theme={temaNuevo}>
                     <Link to={`/admin/editar/${product.id}`}>

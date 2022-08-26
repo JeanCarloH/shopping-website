@@ -21,7 +21,7 @@ export default function CartProduct({
         alt="green iguana"
         height="280"
         src={product.imagenData}
-        onClick={() => handleOpen(product.imagenData)}
+        onClick={() => handleOpen(product.imagenes)}
       />
       <CardContent>
         <Typography gutterBottom variant="body1" component="div">

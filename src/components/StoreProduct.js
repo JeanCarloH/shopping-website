@@ -16,10 +16,10 @@ export default function StoreProduct({ cart, addProduct, product,handleOpen }) {
     <Card sx={{ m: 2 }}>
       <CardMedia
         component="img"
-        alt={product.imagen}
+        alt={product.imagenes.img1.img}
         height="280"
-        src={product.imagenData}
-        onClick={() => handleOpen(product.imagenData)}
+        src={product.imagenes.img1.imgData}
+        onClick={() => handleOpen(product.imagenes)}
       />
      
       <CardContent>
